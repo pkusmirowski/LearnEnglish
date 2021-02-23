@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
@@ -23,7 +21,7 @@ namespace SicariosSA.Models
         public int? IdTasksGapsAbc { get; set; }
         [Column("idTasksGapsABCPack")]
         public int? IdTasksGapsAbcpack { get; set; }
-        [Column("possibleAnswer", TypeName = "text")]
+        [Column("possibleAnswer")]
         public string PossibleAnswer { get; set; }
 
         [ForeignKey(nameof(IdTasksGapsAbc))]

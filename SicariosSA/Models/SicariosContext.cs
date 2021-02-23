@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
@@ -26,22 +24,58 @@ namespace SicariosSA.Models
         public virtual DbSet<TasksGapsZabccorrectAnswer> TasksGapsZabccorrectAnswers { get; set; }
         public virtual DbSet<TasksGapsZabcpack> TasksGapsZabcpacks { get; set; }
         public virtual DbSet<TasksGapsZabcpossibleAnswer> TasksGapsZabcpossibleAnswers { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Polish_CI_AS");
 
+            modelBuilder.Entity<TasksAbc>(entity =>
+            {
+                entity.Property(e => e.TaskName).IsUnicode(false);
+            });
+
             modelBuilder.Entity<TasksAbcanswer>(entity =>
             {
+                entity.Property(e => e.CorrectAnswer).IsUnicode(false);
+
+                entity.Property(e => e.Explanation).IsUnicode(false);
+
+                entity.Property(e => e.Option1).IsUnicode(false);
+
+                entity.Property(e => e.Option1Pl).IsUnicode(false);
+
+                entity.Property(e => e.Option2).IsUnicode(false);
+
+                entity.Property(e => e.Option2Pl).IsUnicode(false);
+
+                entity.Property(e => e.Option3).IsUnicode(false);
+
+                entity.Property(e => e.Option3Pl).IsUnicode(false);
+
+                entity.Property(e => e.Question).IsUnicode(false);
+
                 entity.HasOne(d => d.IdTasksAbcNavigation)
                     .WithMany(p => p.TasksAbcanswers)
                     .HasForeignKey(d => d.IdTasksAbc)
                     .HasConstraintName("FK_TasksABCAnswer_TasksABC");
             });
 
+            modelBuilder.Entity<TasksGap>(entity =>
+            {
+                entity.Property(e => e.Explanation).IsUnicode(false);
+
+                entity.Property(e => e.TaskName).IsUnicode(false);
+
+                entity.Property(e => e.TextToFill).IsUnicode(false);
+            });
+
             modelBuilder.Entity<TasksGapsCorrectAnswer>(entity =>
             {
                 entity.Property(e => e.Number).IsUnicode(false);
+
+                entity.HasOne(d => d.IdTasksGapsNavigation)
+                    .WithMany(p => p.TasksGapsCorrectAnswers)
+                    .HasForeignKey(d => d.IdTasksGaps)
+                    .HasConstraintName("FK_TasksGapsCorrectAnswer_TasksGaps");
 
                 entity.HasOne(d => d.IdTasksPossibleAnswerNavigation)
                     .WithMany(p => p.TasksGapsCorrectAnswers)
@@ -51,22 +85,44 @@ namespace SicariosSA.Models
 
             modelBuilder.Entity<TasksGapsPossibleAnswer>(entity =>
             {
+                entity.Property(e => e.PossibleAnswer).IsUnicode(false);
+
+                entity.Property(e => e.PossibleAnswerPl).IsUnicode(false);
+
                 entity.HasOne(d => d.IdTasksGapsNavigation)
                     .WithMany(p => p.TasksGapsPossibleAnswers)
                     .HasForeignKey(d => d.IdTasksGaps)
                     .HasConstraintName("FK_TasksPossibleAnswer_TasksGaps");
             });
 
+            modelBuilder.Entity<TasksGapsZabc>(entity =>
+            {
+                entity.Property(e => e.Explanation).IsUnicode(false);
+
+                entity.Property(e => e.TaskName).IsUnicode(false);
+
+                entity.Property(e => e.TextToFill).IsUnicode(false);
+            });
+
             modelBuilder.Entity<TasksGapsZabccorrectAnswer>(entity =>
             {
+                entity.Property(e => e.Number).IsUnicode(false);
+
                 entity.HasOne(d => d.IdTasksGapsAbcpossibleAnswerNavigation)
                     .WithMany(p => p.TasksGapsZabccorrectAnswers)
                     .HasForeignKey(d => d.IdTasksGapsAbcpossibleAnswer)
                     .HasConstraintName("FK_TasksGapsZABCCorrectAnswer_TasksGapsZABCPossibleAnswer");
             });
 
+            modelBuilder.Entity<TasksGapsZabcpack>(entity =>
+            {
+                entity.Property(e => e.Abcnumber).IsUnicode(false);
+            });
+
             modelBuilder.Entity<TasksGapsZabcpossibleAnswer>(entity =>
             {
+                entity.Property(e => e.PossibleAnswer).IsUnicode(false);
+
                 entity.HasOne(d => d.IdTasksGapsAbcNavigation)
                     .WithMany(p => p.TasksGapsZabcpossibleAnswers)
                     .HasForeignKey(d => d.IdTasksGapsAbc)

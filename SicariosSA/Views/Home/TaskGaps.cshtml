@@ -1,0 +1,124 @@
+﻿@model SicariosSA.ViewModels.TasksGapsViewModel
+@{
+    ViewData["Title"] = "Zadanie z lukami";
+}
+
+@if (ViewBag.Standard == true)
+{
+    <center>
+        <h2>Egzamin 8 klasisty - Angielski</h2>
+        <form asp-action="TaskGaps" method="post">
+            @foreach (var task in Model.TaskGaps)
+            {
+                <div class="container">
+                    <div class="row border">
+                        <div class="col-sm-12 border">
+                            <h4>@task.TaskName</h4>
+                        </div>
+                        <div class="col-sm-12 border">
+                            <h5>@task.TextToFill</h5>
+                        </div>
+                        <div class="col-sm-12 border">
+                            <h5>Wprowadź numer odpowiedzi w danym polu:</h5>
+                        </div>
+                        @foreach (var taskAnswer in task.PossibleAnswer)
+                        {
+                            <div class="col-sm-12">
+                                <input type="text" id="answer" name="answer" />
+                                <input type="hidden" id="answerText" name="answerText" value="@taskAnswer.PossibleAnswer">
+                                <br />
+                                <h6>@taskAnswer.PossibleAnswer</h6>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Sprawdź odpowiedź" class="btn btn-primary" />
+            </div>
+        </form>
+    </center>
+}
+else if (ViewBag.False == false)
+{
+    <center>
+        <h2>Egzamin 8 klasisty - Angielski</h2>
+        <form asp-action="RandomTask" method="post">
+            <div class="alert alert-danger" role="alert">
+                <b>Zła odpowiedź!</b>
+            </div>
+            @foreach (var task in Model.TaskGaps)
+            {
+                <div class="container">
+                    <div class="row align-items-start border">
+                        <div class="col-sm-12 border">
+                            <h4>@task.TaskName</h4>
+                        </div>
+                        <div class="col-sm-12 border">
+                            <h5>@task.TextToFill</h5>
+                        </div>
+                        @foreach (var taskAnswer in task.PossibleAnswer)
+                        {
+                            <div class="col-sm-12">
+                                <h6>@taskAnswer.PossibleAnswer</h6>
+                            </div>
+                            <div class="col-sm-12">
+                                <h6>@taskAnswer.PossibleAnswerPl</h6>
+                            </div>
+                        }
+                        <div class="col-sm-12 border">
+                            <h5><b>Wytłumaczenie</b></h5>
+                            <h6>@task.Explanation</h6>
+                        </div>
+                    </div>
+                </div>
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Kolejne zadanie" class="btn btn-primary" />
+            </div>
+        </form>
+    </center>
+}
+else if (ViewBag.Success == true)
+{
+    <center>
+        <h2>Egzamin 8 klasisty - Angielski</h2>
+        <form asp-action="RandomTask" method="post">
+            <div class="alert alert-success" role="alert">
+                <b>Poprawna odpowiedź!</b>
+            </div>
+            @foreach (var task in Model.TaskGaps)
+            {
+                <div class="container">
+                    <div class="row align-items-start border">
+                        <div class="col-sm-12 border">
+                            <h4>@task.TaskName</h4>
+                        </div>
+                        <div class="col-sm-12 border">
+                            <h5>@task.TextToFill</h5>
+                        </div>
+                        @foreach (var taskAnswer in task.PossibleAnswer)
+                        {
+                            <div class="col-sm-12">
+                                <h6>@taskAnswer.PossibleAnswer</h6>
+                            </div>
+                            <div class="col-sm-12">
+                                <h6>@taskAnswer.PossibleAnswerPl</h6>
+                            </div>
+                        }
+                        <div class="col-sm-12 border">
+                            <h5><b>Wytłumaczenie</b></h5>
+                            <h6>@task.Explanation</h6>
+                        </div>
+                    </div>
+                </div>
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Kolejne zadanie" class="btn btn-primary" />
+            </div>
+        </form>
+    </center>
+}

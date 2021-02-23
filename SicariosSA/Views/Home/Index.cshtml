@@ -8,25 +8,25 @@
     <center>
         <h2>Egzamin 8 klasisty - Angielski</h2>
         <form asp-action="Index" method="post">
-            @foreach (var election in Model.TaskABC)
+            @foreach (var task in Model.TaskABC)
             {
                 <div class="container">
                     <div class="row border">
                         <div class="col-sm-12 border">
                             <h4><b>Zadanie</b></h4>
-                            <h5>@election.Question</h5>
+                            <h5>@task.Question</h5>
                         </div>
                         <div class="col-sm-4">
                             <h5><b>A</b></h5>
-                            <h6><input type="checkbox" name="answer" value="@election.Option1" onclick="MutExChkList(this);" /> @election.Option1</h6>
+                            <h6><input type="checkbox" name="answer" value="@task.Option1" onclick="MutExChkList(this);" /> @task.Option1</h6>
                         </div>
                         <div class="col-sm-4">
                             <h5><b>B</b></h5>
-                            <h6><input type="checkbox" name="answer" value="@election.Option2" onclick="MutExChkList(this);" /> @election.Option2</h6>
+                            <h6><input type="checkbox" name="answer" value="@task.Option2" onclick="MutExChkList(this);" /> @task.Option2</h6>
                         </div>
                         <div class="col-sm-4">
                             <h5><b>C</b></h5>
-                            <h6><input type="checkbox" name="answer" value="@election.Option3" onclick="MutExChkList(this);" /> @election.Option3</h6>
+                            <h6><input type="checkbox" name="answer" value="@task.Option3" onclick="MutExChkList(this);" /> @task.Option3</h6>
                         </div>
                     </div>
                 </div>
@@ -42,47 +42,47 @@ else if (ViewBag.False == false)
 {
 <center>
     <h2>Egzamin 8 klasisty - Angielski</h2>
-    <form asp-action="Index" method="post">
+    <form asp-action="RandomTask" method="post">
         <div class="alert alert-danger" role="alert">
             <b>Zła odpowiedź!</b>
         </div>
-        @foreach (var election in Model.TaskABC)
+        @foreach (var task in Model.TaskABC)
         {
             <div class="container">
                 <div class="row align-items-start border">
                     <div class="col-sm-12 border">
                         <h4><b>Zadanie</b></h4>
-                        <h5>@election.Question</h5>
+                        <h5>@task.Question</h5>
                     </div>
                     <div class="row">
                         <div class="col-sm-2">
                             <h5><b>A</b></h5>
-                            <h6>@election.Option1</h6>
+                            <h6>@task.Option1</h6>
                         </div>
                         <div class="col-sm-2">
                             <h5><b>APL</b></h5>
-                            <h6>@election.Option1Pl</h6>
+                            <h6>@task.Option1Pl</h6>
                         </div>
                         <div class="col-sm-2">
                             <h5><b>B</b></h5>
-                            <h6>@election.Option2</h6>
+                            <h6>@task.Option2</h6>
                         </div>
                         <div class="col-sm-2">
                             <h5><b>BPL</b></h5>
-                            <h6>@election.Option2Pl</h6>
+                            <h6>@task.Option2Pl</h6>
                         </div>
                         <div class="col-sm-2">
                             <h5><b>C</b></h5>
-                            <h6>@election.Option3</h6>
+                            <h6>@task.Option3</h6>
                         </div>
                         <div class="col-sm-2">
                             <h5><b>CPL</b></h5>
-                            <h6>@election.Option3Pl</h6>
+                            <h6>@task.Option3Pl</h6>
                         </div>
                     </div>
                     <div class="col-sm-12 border">
                         <h5><b>Wytłumaczenie</b></h5>
-                        <h6>@election.Explanation</h6>
+                        <h6>@task.Explanation</h6>
                     </div>
                 </div>
             </div>
@@ -98,47 +98,47 @@ else if (ViewBag.Success == true)
 {
 <center>
     <h2>Egzamin 8 klasisty - Angielski</h2>
-    <form asp-action="Index" method="post">
+    <form asp-action="RandomTask" method="post">
         <div class="alert alert-success" role="alert">
             <b>Poprawna odpowiedź!</b>
         </div>
-        @foreach (var election in Model.TaskABC)
+        @foreach (var task in Model.TaskABC)
         {
             <div class="container">
                 <div class="row align-items-start border">
                     <div class="col-sm-12 border">
                         <h4><b>Zadanie</b></h4>
-                        <h5>@election.Question</h5>
+                        <h5>@task.Question</h5>
                     </div>
                     <div class="row">
                         <div class="col-sm-2">
                             <h5><b>A</b></h5>
-                            <h6>@election.Option1</h6>
+                            <h6>@task.Option1</h6>
                         </div>
                         <div class="col-sm-2">
                             <h5><b>APL</b></h5>
-                            <h6>@election.Option1Pl</h6>
+                            <h6>@task.Option1Pl</h6>
                         </div>
                         <div class="col-sm-2">
                             <h5><b>B</b></h5>
-                            <h6>@election.Option2</h6>
+                            <h6>@task.Option2</h6>
                         </div>
                         <div class="col-sm-2">
                             <h5><b>BPL</b></h5>
-                            <h6>@election.Option2Pl</h6>
+                            <h6>@task.Option2Pl</h6>
                         </div>
                         <div class="col-sm-2">
                             <h5><b>C</b></h5>
-                            <h6>@election.Option3</h6>
+                            <h6>@task.Option3</h6>
                         </div>
                         <div class="col-sm-2">
                             <h5><b>CPL</b></h5>
-                            <h6>@election.Option3Pl</h6>
+                            <h6>@task.Option3Pl</h6>
                         </div>
                     </div>
                     <div class="col-sm-12 border">
                         <h5><b>Wytłumaczenie</b></h5>
-                        <h6>@election.Explanation</h6>
+                        <h6>@task.Explanation</h6>
                     </div>
                 </div>
             </div>

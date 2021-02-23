@@ -1,9 +1,7 @@
 ﻿using SicariosSA.Models;
 using SicariosSA.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SicariosSA.Services
 {
@@ -15,7 +13,7 @@ namespace SicariosSA.Services
             _context = context;
         }
 
-        public TasksABCViewModel GetABCTask()
+        public TasksABCViewModel GetTaskABC()
         {
             var result = _context.TasksAbcs.OrderBy(_ => Guid.NewGuid()).FirstOrDefault();
 
@@ -39,15 +37,69 @@ namespace SicariosSA.Services
             };
         }
 
-        public int checkAnswer(TasksABCViewModel viewModel, string answer)
+        public int TaskABCCheckAnswer(TasksABCViewModel viewModel, string answer)
         {
             if (answer == null)
             {
                 return 0;
             }
 
-            var x = viewModel.TaskABC.FirstOrDefault();
-            if (x.CorrectAnswer == answer)
+            var currentTask = viewModel.TaskABC.FirstOrDefault();
+            if (currentTask.CorrectAnswer == answer)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+
+        public TasksGapsViewModel GetTaskGaps()
+        {
+            var task = _context.TasksGaps.OrderBy(_ => Guid.NewGuid()).FirstOrDefault();
+
+            var answers = _context.TasksGapsPossibleAnswers.Where(x => x.IdTasksGaps == task.Id).ToList();
+
+            var taskGaps = _context.TasksGaps.Select(x => new TasksGapsItemViewModel
+            {
+                Id = x.Id,
+                TaskName = x.TaskName,
+                TextToFill = x.TextToFill,
+                Explanation = x.Explanation,
+                PossibleAnswer = answers,
+            }).Where(x => x.Id == task.Id);
+
+            return new TasksGapsViewModel
+            {
+                TaskGaps = taskGaps
+            };
+        }
+
+        public int TaskGapsCheckAnswer(TasksGapsViewModel viewModel, string[] answer, string[] answerText)
+        {
+
+            if (answer == null || answer.Length == 0 || answerText == null || answerText.Length == 0)
+            {
+                return 0;
+            }
+
+            var currentTask = viewModel.TaskGaps.FirstOrDefault();
+
+            var answers = _context.TasksGapsCorrectAnswers.Where(x => x.IdTasksGaps == currentTask.Id).ToList();
+
+            int counter = 0;
+
+            bool[] correctAnswers = new bool[answer.Length];
+
+            foreach (var an in answers)
+            {
+                correctAnswers[counter] = an.Number == answer[counter];
+                counter++;
+            }
+            var numCorrectAnswers = _context.TasksGapsCorrectAnswers.Where(x => x.IdTasksGaps == currentTask.Id).Count();
+
+            if (correctAnswers.Count(c => c) == numCorrectAnswers)
             {
                 return 1;
             }

@@ -1,4 +1,4 @@
-namespace SicariosSA.Models
+﻿namespace SicariosSA.Models
 {
     public class ErrorViewModel
     {

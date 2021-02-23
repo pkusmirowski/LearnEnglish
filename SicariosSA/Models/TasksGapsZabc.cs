@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
@@ -19,11 +17,11 @@ namespace SicariosSA.Models
         [Key]
         [Column("id")]
         public int Id { get; set; }
-        [Column("taskName", TypeName = "text")]
+        [Column("taskName")]
         public string TaskName { get; set; }
-        [Column("explanation", TypeName = "text")]
+        [Column("explanation")]
         public string Explanation { get; set; }
-        [Column("textToFill", TypeName = "text")]
+        [Column("textToFill")]
         public string TextToFill { get; set; }
 
         [InverseProperty(nameof(TasksGapsZabcpossibleAnswer.IdTasksGapsAbcNavigation))]

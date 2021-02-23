@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SicariosSA.ViewModels
+﻿namespace SicariosSA.ViewModels
 {
     public class TasksABCItemViewModel
     {
-        public int ?Id { get; set; }
+        public int? Id { get; set; }
         public string Question { get; set; }
 
         public string Option1 { get; set; }
