@@ -24,6 +24,7 @@ namespace SicariosSA.Models
         public virtual DbSet<TasksGapsZabccorrectAnswer> TasksGapsZabccorrectAnswers { get; set; }
         public virtual DbSet<TasksGapsZabcpack> TasksGapsZabcpacks { get; set; }
         public virtual DbSet<TasksGapsZabcpossibleAnswer> TasksGapsZabcpossibleAnswers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Polish_CI_AS");
@@ -122,6 +123,8 @@ namespace SicariosSA.Models
             modelBuilder.Entity<TasksGapsZabcpossibleAnswer>(entity =>
             {
                 entity.Property(e => e.PossibleAnswer).IsUnicode(false);
+
+                entity.Property(e => e.PossibleAnswerPl).IsUnicode(false);
 
                 entity.HasOne(d => d.IdTasksGapsAbcNavigation)
                     .WithMany(p => p.TasksGapsZabcpossibleAnswers)

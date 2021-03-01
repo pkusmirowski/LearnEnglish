@@ -144,3 +144,5 @@ C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.d
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\ref\SicariosSA.dll
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.pdb
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.genruntimeconfig.cache
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Home\TaskGapsABC.cshtml.g.cs
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.csprojAssemblyReference.cache

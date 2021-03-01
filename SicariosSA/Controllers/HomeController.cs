@@ -73,6 +73,26 @@ namespace SicariosSA.Controllers
             return View(vm);
         }
 
+        public IActionResult TaskGapsABC(string[] answer)
+        {
+            var vm = _taskService.GetTaskGapsABC();
+
+            if (_taskService.TaskGapsABCCheckAnswer(vm, answer) == 1)
+            {
+                ViewBag.Success = true;
+            }
+            else if (_taskService.TaskGapsABCCheckAnswer(vm, answer) == 2)
+            {
+                ViewBag.False = false;
+            }
+            else
+            {
+                ViewBag.Standard = true;
+            }
+
+            return View(vm);
+        }
+
         public IActionResult Privacy()
         {
             return View();

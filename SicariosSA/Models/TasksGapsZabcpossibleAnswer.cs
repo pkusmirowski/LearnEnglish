@@ -23,6 +23,8 @@ namespace SicariosSA.Models
         public int? IdTasksGapsAbcpack { get; set; }
         [Column("possibleAnswer")]
         public string PossibleAnswer { get; set; }
+        [Column("possibleAnswerPL")]
+        public string PossibleAnswerPl { get; set; }
 
         [ForeignKey(nameof(IdTasksGapsAbc))]
         [InverseProperty(nameof(TasksGapsZabc.TasksGapsZabcpossibleAnswers))]

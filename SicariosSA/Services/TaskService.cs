@@ -108,5 +108,61 @@ namespace SicariosSA.Services
                 return 2;
             }
         }
+
+        public TasksGapsABCViewModel GetTaskGapsABC()
+        {
+            var task = _context.TasksGapsZabcs.OrderBy(_ => Guid.NewGuid()).FirstOrDefault();
+
+            var answers = _context.TasksGapsZabcpossibleAnswers.Where(x => x.IdTasksGapsAbc == task.Id).ToList();
+
+            var taskGaps = _context.TasksGapsZabcs.Select(x => new TasksGapsABCItemViewModel
+            {
+                Id = x.Id,
+                TaskName = x.TaskName,
+                TextToFill = x.TextToFill,
+                Explanation = x.Explanation,
+                PossibleAnswer = answers,
+            }).Where(x => x.Id == task.Id);
+
+
+
+            return new TasksGapsABCViewModel
+            {
+                TaskGapsABC = taskGaps
+            };
+        }
+
+        public int TaskGapsABCCheckAnswer(TasksGapsABCViewModel viewModel, string[] answer)
+        {
+
+            if (answer == null || answer.Length == 0)
+            {
+                return 0;
+            }
+
+            var currentTask = viewModel.TaskGapsABC.FirstOrDefault();
+
+            var answers = _context.TasksGapsZabccorrectAnswers.Where(x => x.Id == currentTask.Id).ToList();
+
+            int counter = 0;
+
+            bool[] correctAnswers = new bool[answer.Length];
+
+            foreach (var an in answers)
+            {
+                correctAnswers[counter] = an.Number == answer[counter];
+                counter++;
+            }
+            var numCorrectAnswers = _context.TasksGapsZabccorrectAnswers.Where(x => x.Id == currentTask.Id).Count();
+
+            if (correctAnswers.Count(c => c) == numCorrectAnswers)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
     }
 }
