@@ -1,10 +1,3 @@
-C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.AssemblyInfoInputs.cache
-C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.AssemblyInfo.cs
-C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.csproj.CoreCompileInputs.cache
-C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.RazorAssemblyInfo.cache
-C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.RazorAssemblyInfo.cs
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\appsettings.json
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\SicariosSA.exe
@@ -122,6 +115,13 @@ C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\runtimes\win
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.AssemblyInfoInputs.cache
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.AssemblyInfo.cs
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.csproj.CoreCompileInputs.cache
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.RazorAssemblyInfo.cache
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.RazorAssemblyInfo.cs
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\staticwebassets\SicariosSA.StaticWebAssets.Manifest.cache
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\staticwebassets\SicariosSA.StaticWebAssets.xml
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\scopedcss\bundle\SicariosSA.styles.css
@@ -131,6 +131,7 @@ C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.R
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Home\TaskGaps.cshtml.g.cs
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Home\TaskGapsABC.cshtml.g.cs
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -144,5 +145,5 @@ C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.d
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\ref\SicariosSA.dll
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.pdb
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.genruntimeconfig.cache
-C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Home\TaskGapsABC.cshtml.g.cs
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.csprojAssemblyReference.cache
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Home\AudioTaskGaps.cshtml.g.cs

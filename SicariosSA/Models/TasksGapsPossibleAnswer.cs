@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,6 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SicariosSA.Models
 {
     [Table("TasksGapsPossibleAnswer")]
+    [Index(nameof(IdTasksGaps), Name = "IX_TasksGapsPossibleAnswer_idTasksGaps")]
     public partial class TasksGapsPossibleAnswer
     {
         public TasksGapsPossibleAnswer()

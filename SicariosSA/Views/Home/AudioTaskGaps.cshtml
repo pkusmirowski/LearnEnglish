@@ -1,0 +1,151 @@
+﻿@model SicariosSA.ViewModels.AudioTasksGapsViewModel
+
+@{ ViewData["Title"] = "Zadanie audio z wpisywaniem"; }
+
+@if (ViewBag.Standard == true)
+{
+<center>
+    <h2>Egzamin 8 klasisty - Angielski</h2>
+    <form asp-action="AudioTaskGaps" method="post">
+        @foreach (var task in Model.AudioTaskGaps)
+        {
+        <div class="container">
+            <div class="row border">
+                <div class="col-sm-12 border">
+                    <h4>@task.TaskName</h4>
+                </div>
+                <div class="col-sm-12 border">
+                    <audio controls="controls">
+                        <source src="@task.SoundtrackName" type="audio/mp3" />
+                        <p>Your browser does not support HTML 5 audio element</p>
+                    </audio>
+                </div>
+                <div class="col-sm-12 border">
+                    <h5>Wpisz odpowiedzi:</h5>
+                </div>
+                @for (int i = 1; i <= 4; i++)
+                {
+                    <div class="col-sm-12">
+                        Luka @i
+                        <input type="text" id="answer" name="answer" />
+                        <br />
+                    </div>
+                }
+            </div>
+        </div>
+        }
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Sprawdź odpowiedź" class="btn btn-primary" />
+        </div>
+    </form>
+</center> 
+}
+else if (ViewBag.False == false)
+{
+<center>
+    <h2>Egzamin 8 klasisty - Angielski</h2>
+    <form asp-action="RandomTask" method="post">
+        <div class="alert alert-danger" role="alert">
+            <b>Zła odpowiedź!</b>
+        </div>
+        @foreach (var task in Model.AudioTaskGaps)
+        {
+        <div class="container">
+            <div class="row border">
+                <div class="col-sm-12 border">
+                    <h4>@task.TaskName</h4>
+                </div>
+                <div class="col-sm-12 border">
+                    <audio controls="controls">
+                        <source src="@task.SoundtrackName" type="audio/mp3" />
+                        <p>Your browser does not support HTML 5 audio element</p>
+                    </audio>
+                </div>
+                <div class="col-sm-12 border">
+                    <h5>Wpisz odpowiedzi:</h5>
+                </div>
+                <div class="col-sm-12">
+                    <h6>@task.Answer1</h6>
+                    <h6>@task.Answer1Pl</h6>
+                </div>
+                <div class="col-sm-12">
+                    <h6>@task.Answer2</h6>
+                    <h6>@task.Answer2Pl</h6>
+                </div>
+                <div class="col-sm-12">
+                    <h6>@task.Answer3</h6>
+                    <h6>@task.Answer3Pl</h6>
+                </div>
+                <div class="col-sm-12">
+                    <h6>@task.Answer4</h6>
+                    <h6>@task.Answer4Pl</h6>
+                </div>
+                <div class="col-sm-12 border">
+                    <h5><b>Wytłumaczenie</b></h5>
+                    <h6>@task.Explanation</h6>
+                </div>
+            </div>
+        </div>
+        }
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Kolejne zadanie" class="btn btn-primary" />
+        </div>
+    </form>
+</center>
+ }
+else if (ViewBag.Success == true)
+{
+<center>
+    <h2>Egzamin 8 klasisty - Angielski</h2>
+    <form asp-action="RandomTask" method="post">
+        <div class="alert alert-success" role="alert">
+            <b>Poprawna odpowiedź!</b>
+        </div>
+        @foreach (var task in Model.AudioTaskGaps)
+        {
+        <div class="container">
+            <div class="row border">
+                <div class="col-sm-12 border">
+                    <h4>@task.TaskName</h4>
+                </div>
+                <div class="col-sm-12 border">
+                    <audio controls="controls">
+                        <source src="@task.SoundtrackName" type="audio/mp3" />
+                        <p>Your browser does not support HTML 5 audio element</p>
+                    </audio>
+                </div>
+                <div class="col-sm-12 border">
+                    <h5>Wpisz odpowiedzi:</h5>
+                </div>
+                <div class="col-sm-12">
+                    <h6>@task.Answer1</h6>
+                    <h6>@task.Answer1Pl</h6>
+                </div>
+                <div class="col-sm-12">
+                    <h6>@task.Answer2</h6>
+                    <h6>@task.Answer2Pl</h6>
+                </div>
+                <div class="col-sm-12">
+                    <h6>@task.Answer3</h6>
+                    <h6>@task.Answer3Pl</h6>
+                </div>
+                <div class="col-sm-12">
+                    <h6>@task.Answer4</h6>
+                    <h6>@task.Answer4Pl</h6>
+                </div>
+                <div class="col-sm-12 border">
+                    <h5><b>Wytłumaczenie</b></h5>
+                    <h6>@task.Explanation</h6>
+                </div>
+            </div>
+        </div>
+        }
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Kolejne zadanie" class="btn btn-primary" />
+        </div>
+    </form>
+</center>
+}

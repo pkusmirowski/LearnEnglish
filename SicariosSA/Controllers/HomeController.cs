@@ -51,8 +51,6 @@ namespace SicariosSA.Controllers
 
         public IActionResult TaskGaps(string[] answer, string[] answerText)
         {
-
-
             var vm = _taskService.GetTaskGaps();
 
             if (_taskService.TaskGapsCheckAnswer(vm, answer, answerText) == 1)
@@ -68,8 +66,6 @@ namespace SicariosSA.Controllers
                 ViewBag.Standard = true;
             }
 
-
-
             return View(vm);
         }
 
@@ -82,6 +78,26 @@ namespace SicariosSA.Controllers
                 ViewBag.Success = true;
             }
             else if (_taskService.TaskGapsABCCheckAnswer(vm, answer) == 2)
+            {
+                ViewBag.False = false;
+            }
+            else
+            {
+                ViewBag.Standard = true;
+            }
+
+            return View(vm);
+        }
+
+        public IActionResult AudioTaskGaps(string[] answer)
+        {
+            var vm = _taskService.GetAudioTaskGapsABC();
+
+            if (_taskService.TaskAudioGapsCheckAnswer(vm, answer) == 1)
+            {
+                ViewBag.Success = true;
+            }
+            else if (_taskService.TaskAudioGapsCheckAnswer(vm, answer) == 2)
             {
                 ViewBag.False = false;
             }

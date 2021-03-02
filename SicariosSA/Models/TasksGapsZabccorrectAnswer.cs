@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
@@ -6,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SicariosSA.Models
 {
     [Table("TasksGapsZABCCorrectAnswer")]
+    [Index(nameof(IdTasksGapsAbcpossibleAnswer), Name = "IX_TasksGapsZABCCorrectAnswer_idTasksGapsABCPossibleAnswer")]
     public partial class TasksGapsZabccorrectAnswer
     {
         [Key]

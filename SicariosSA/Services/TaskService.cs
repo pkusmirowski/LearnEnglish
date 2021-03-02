@@ -78,7 +78,6 @@ namespace SicariosSA.Services
 
         public int TaskGapsCheckAnswer(TasksGapsViewModel viewModel, string[] answer, string[] answerText)
         {
-
             if (answer == null || answer.Length == 0 || answerText == null || answerText.Length == 0)
             {
                 return 0;
@@ -124,8 +123,6 @@ namespace SicariosSA.Services
                 PossibleAnswer = answers,
             }).Where(x => x.Id == task.Id);
 
-
-
             return new TasksGapsABCViewModel
             {
                 TaskGapsABC = taskGaps
@@ -134,7 +131,6 @@ namespace SicariosSA.Services
 
         public int TaskGapsABCCheckAnswer(TasksGapsABCViewModel viewModel, string[] answer)
         {
-
             if (answer == null || answer.Length == 0)
             {
                 return 0;
@@ -164,5 +160,52 @@ namespace SicariosSA.Services
                 return 2;
             }
         }
+
+        public AudioTasksGapsViewModel GetAudioTaskGapsABC()
+        {
+            var task = _context.AudioTasksGaps.OrderBy(_ => Guid.NewGuid()).FirstOrDefault();
+
+            var taskGaps = _context.AudioTasksGapsCorrectAnswers.Select(x => new AudioTasksGapsItemViewModel
+            {
+                Id = x.Id,
+                TaskName = task.TaskName,
+                Answer1 = x.Answer1,
+                Answer2 = x.Answer2,
+                Answer3 = x.Answer3,
+                Answer4 = x.Answer4,
+                Answer1Pl = x.Answer1Pl,
+                Answer2Pl = x.Answer2Pl,
+                Answer3Pl = x.Answer3Pl,
+                Answer4Pl = x.Answer4Pl,
+                SoundtrackName = task.SoundtrackName,
+                Explanation = task.Explanation
+            }).Where(x => x.Id == task.Id);
+
+            return new AudioTasksGapsViewModel
+            {
+                AudioTaskGaps = taskGaps
+            };
+        }
+
+        public int TaskAudioGapsCheckAnswer(AudioTasksGapsViewModel viewModel, string[] answer)
+        {
+            if (answer == null || answer.Length == 0)
+            {
+                return 0;
+            }
+
+            var currentTask = viewModel.AudioTaskGaps.FirstOrDefault();
+
+            if (currentTask.Answer1 == answer[0] && currentTask.Answer2 == answer[1] && currentTask.Answer3 == answer[2] && currentTask.Answer4 == answer[3])
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+
+
     }
 }

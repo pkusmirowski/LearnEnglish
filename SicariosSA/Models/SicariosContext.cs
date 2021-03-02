@@ -15,6 +15,8 @@ namespace SicariosSA.Models
         {
         }
 
+        public virtual DbSet<AudioTasksGap> AudioTasksGaps { get; set; }
+        public virtual DbSet<AudioTasksGapsCorrectAnswer> AudioTasksGapsCorrectAnswers { get; set; }
         public virtual DbSet<TasksAbc> TasksAbcs { get; set; }
         public virtual DbSet<TasksAbcanswer> TasksAbcanswers { get; set; }
         public virtual DbSet<TasksGap> TasksGaps { get; set; }
@@ -29,10 +31,40 @@ namespace SicariosSA.Models
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Polish_CI_AS");
 
-            modelBuilder.Entity<TasksAbc>(entity =>
+            modelBuilder.Entity<AudioTasksGap>(entity =>
             {
+                entity.Property(e => e.Explanation).IsUnicode(false);
+
+                entity.Property(e => e.SoundtrackName).IsUnicode(false);
+
                 entity.Property(e => e.TaskName).IsUnicode(false);
             });
+
+            modelBuilder.Entity<AudioTasksGapsCorrectAnswer>(entity =>
+            {
+                entity.Property(e => e.Answer1).IsUnicode(false);
+
+                entity.Property(e => e.Answer1Pl).IsUnicode(false);
+
+                entity.Property(e => e.Answer2).IsUnicode(false);
+
+                entity.Property(e => e.Answer2Pl).IsUnicode(false);
+
+                entity.Property(e => e.Answer3).IsUnicode(false);
+
+                entity.Property(e => e.Answer3Pl).IsUnicode(false);
+
+                entity.Property(e => e.Answer4).IsUnicode(false);
+
+                entity.Property(e => e.Answer4Pl).IsUnicode(false);
+
+                entity.HasOne(d => d.IdAudioTaskNavigation)
+                    .WithMany(p => p.AudioTasksGapsCorrectAnswers)
+                    .HasForeignKey(d => d.IdAudioTask)
+                    .HasConstraintName("FK_AudioTaskCorrectAnswer_AudioTask");
+            });
+
+            modelBuilder.Entity<TasksAbc>(entity => entity.Property(e => e.TaskName).IsUnicode(false));
 
             modelBuilder.Entity<TasksAbcanswer>(entity =>
             {
@@ -115,10 +147,7 @@ namespace SicariosSA.Models
                     .HasConstraintName("FK_TasksGapsZABCCorrectAnswer_TasksGapsZABCPossibleAnswer");
             });
 
-            modelBuilder.Entity<TasksGapsZabcpack>(entity =>
-            {
-                entity.Property(e => e.Abcnumber).IsUnicode(false);
-            });
+            modelBuilder.Entity<TasksGapsZabcpack>(entity => entity.Property(e => e.Abcnumber).IsUnicode(false));
 
             modelBuilder.Entity<TasksGapsZabcpossibleAnswer>(entity =>
             {
