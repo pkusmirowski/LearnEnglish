@@ -36,7 +36,7 @@ namespace SicariosSA.Controllers
 
         public IActionResult RandomTask()
         {
-            int randomTask = MathFunctions.RandomNumber(0, 2);
+            int randomTask = MathFunctions.RandomNumber(0, 4);
 
             if (randomTask == 0)
             {
@@ -46,6 +46,15 @@ namespace SicariosSA.Controllers
             {
                 return RedirectToAction("TaskGaps");
             }
+            else if (randomTask == 2)
+            {
+                return RedirectToAction("TaskGapsABC");
+            }
+            else if (randomTask == 3)
+            {
+                return RedirectToAction("AudioTaskGaps");
+            }
+
             return View();
         }
 
@@ -98,6 +107,26 @@ namespace SicariosSA.Controllers
                 ViewBag.Success = true;
             }
             else if (_taskService.TaskAudioGapsCheckAnswer(vm, answer) == 2)
+            {
+                ViewBag.False = false;
+            }
+            else
+            {
+                ViewBag.Standard = true;
+            }
+
+            return View(vm);
+        }
+
+        public IActionResult DialogueTaskGaps(string[] answer)
+        {
+            var vm = _taskService.GetDialogueTasksGaps();
+
+            if (_taskService.DialogueTaskGapsCheckAnswer(vm, answer) == 1)
+            {
+                ViewBag.Success = true;
+            }
+            else if (_taskService.DialogueTaskGapsCheckAnswer(vm, answer) == 2)
             {
                 ViewBag.False = false;
             }

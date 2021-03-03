@@ -11,7 +11,7 @@ namespace SicariosSA.Migrations
 {
     [DbContext(typeof(SicariosContext))]
     [Migration("20210301222114_init")]
-    partial class init
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

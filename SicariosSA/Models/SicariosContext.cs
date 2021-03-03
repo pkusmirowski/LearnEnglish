@@ -17,6 +17,9 @@ namespace SicariosSA.Models
 
         public virtual DbSet<AudioTasksGap> AudioTasksGaps { get; set; }
         public virtual DbSet<AudioTasksGapsCorrectAnswer> AudioTasksGapsCorrectAnswers { get; set; }
+        public virtual DbSet<DialogueTasksGap> DialogueTasksGaps { get; set; }
+        public virtual DbSet<DialogueTasksGapsAnswerPack> DialogueTasksGapsAnswerPacks { get; set; }
+        public virtual DbSet<DialogueTasksGapsCorrectAnswer> DialogueTasksGapsCorrectAnswers { get; set; }
         public virtual DbSet<TasksAbc> TasksAbcs { get; set; }
         public virtual DbSet<TasksAbcanswer> TasksAbcanswers { get; set; }
         public virtual DbSet<TasksGap> TasksGaps { get; set; }
@@ -64,7 +67,46 @@ namespace SicariosSA.Models
                     .HasConstraintName("FK_AudioTaskCorrectAnswer_AudioTask");
             });
 
-            modelBuilder.Entity<TasksAbc>(entity => entity.Property(e => e.TaskName).IsUnicode(false));
+            modelBuilder.Entity<DialogueTasksGap>(entity =>
+            {
+                entity.Property(e => e.Explanation).IsUnicode(false);
+
+                entity.Property(e => e.TaskName).IsUnicode(false);
+
+                entity.Property(e => e.TextToFill).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<DialogueTasksGapsAnswerPack>(entity =>
+            {
+                entity.Property(e => e.AnswerNumber).IsUnicode(false);
+
+                entity.HasOne(d => d.IdDialogueTasksGapsNavigation)
+                    .WithMany(p => p.DialogueTasksGapsAnswerPacks)
+                    .HasForeignKey(d => d.IdDialogueTasksGaps)
+                    .HasConstraintName("FK_DialogueTasksGapsAnswerPack_DialogueTasksGaps1");
+
+                entity.HasOne(d => d.IdDialogueTasksGaps1)
+                    .WithMany(p => p.DialogueTasksGapsAnswerPacks)
+                    .HasForeignKey(d => d.IdDialogueTasksGaps)
+                    .HasConstraintName("FK_DialogueTasksGapsAnswerPack_DialogueTasksGapsCorrectAnswer");
+            });
+
+            modelBuilder.Entity<DialogueTasksGapsCorrectAnswer>(entity =>
+            {
+                entity.Property(e => e.CorrectAnswer).IsUnicode(false);
+
+                entity.Property(e => e.CorrectAnswerPl).IsUnicode(false);
+
+                entity.HasOne(d => d.IdDialogueTasksGapsNavigation)
+                    .WithMany(p => p.DialogueTasksGapsCorrectAnswers)
+                    .HasForeignKey(d => d.IdDialogueTasksGaps)
+                    .HasConstraintName("FK_DialogueTasksGapsCorrectAnswer_DialogueTasksGaps");
+            });
+
+            modelBuilder.Entity<TasksAbc>(entity =>
+            {
+                entity.Property(e => e.TaskName).IsUnicode(false);
+            });
 
             modelBuilder.Entity<TasksAbcanswer>(entity =>
             {
@@ -147,7 +189,10 @@ namespace SicariosSA.Models
                     .HasConstraintName("FK_TasksGapsZABCCorrectAnswer_TasksGapsZABCPossibleAnswer");
             });
 
-            modelBuilder.Entity<TasksGapsZabcpack>(entity => entity.Property(e => e.Abcnumber).IsUnicode(false));
+            modelBuilder.Entity<TasksGapsZabcpack>(entity =>
+            {
+                entity.Property(e => e.Abcnumber).IsUnicode(false);
+            });
 
             modelBuilder.Entity<TasksGapsZabcpossibleAnswer>(entity =>
             {

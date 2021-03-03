@@ -2,7 +2,7 @@
 {
     public class AudioTasksGapsItemViewModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string TaskName { get; set; }
 
         public string Answer1 { get; set; }

@@ -167,7 +167,7 @@ namespace SicariosSA.Services
 
             var taskGaps = _context.AudioTasksGapsCorrectAnswers.Select(x => new AudioTasksGapsItemViewModel
             {
-                Id = x.Id,
+                Id = x.IdAudioTask,
                 TaskName = task.TaskName,
                 Answer1 = x.Answer1,
                 Answer2 = x.Answer2,
@@ -206,6 +206,75 @@ namespace SicariosSA.Services
             }
         }
 
+        public DialogueTasksGapsViewModel GetDialogueTasksGaps()
+        {
+            var task = _context.DialogueTasksGaps.OrderBy(_ => Guid.NewGuid()).FirstOrDefault();
 
+            var answers = _context.DialogueTasksGapsCorrectAnswers.Where(x => x.IdDialogueTasksGaps == task.Id).ToList();
+
+            var answerNumber = _context.DialogueTasksGapsAnswerPacks.Where(x => x.IdDialogueTasksGaps == task.Id).ToList();
+
+            var taskGaps = _context.DialogueTasksGaps.Select(x => new DialogueTasksGapsItemViewModel
+            {
+                Id = x.Id,
+                TaskName = x.TaskName,
+                TextToFill = x.TextToFill,
+                Explanation = x.Explanation,
+                CorrectAnswers = answers,
+                AnswerNumber = answerNumber.Count,
+            }).Where(x => x.Id == task.Id);
+
+            return new DialogueTasksGapsViewModel
+            {
+                DialogueTaskGaps = taskGaps
+            };
+        }
+
+        public int DialogueTaskGapsCheckAnswer(DialogueTasksGapsViewModel viewModel, string[] answer)
+        {
+            if (answer == null || answer.Length == 0)
+            {
+                return 0;
+            }
+
+            var currentTask = viewModel.DialogueTaskGaps.FirstOrDefault();
+
+            var answers = _context.DialogueTasksGapsCorrectAnswers.Where(x => x.IdDialogueTasksGaps == currentTask.Id).ToList();
+
+            var answerNumber = _context.DialogueTasksGapsAnswerPacks.Where(x => x.IdDialogueTasksGaps == currentTask.Id).ToList();
+
+            int counter = 0;
+
+            bool[] correctAnswers = new bool[answerNumber.Count];
+
+            Array.Resize(ref answer, answers.Count);
+
+            foreach (var an in answers)
+            {
+                for (int i = 0; i < answers.Count; i++)
+                {
+                    if (!String.IsNullOrEmpty(answer[counter]))
+                    {
+                        if (answers[i].CorrectAnswer == answer[counter])
+                        {
+                            correctAnswers[counter] = true;
+                        }
+                    }
+                }
+                counter++;
+            }
+
+
+            int wartownik = 0;
+
+            if (correctAnswers.Count(c => c) == answerNumber.Count)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
     }
 }
