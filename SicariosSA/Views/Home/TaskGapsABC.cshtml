@@ -11,11 +11,10 @@
 @if (ViewBag.Standard == true)
 {
 <center>
-    <h2>Egzamin 8 klasisty - Angielski</h2>
     <form asp-action="TaskGapsABC" method="post">
         @foreach (var task in Model.TaskGapsABC)
         {
-            <div class="container">
+            <div class="container box-color">
                 <div class="row border">
                     <div class="col-sm-12 border">
                         <h4>@task.TaskName</h4>
@@ -53,14 +52,13 @@
 else if (ViewBag.False == false)
 {
     <center>
-        <h2>Egzamin 8 klasisty - Angielski</h2>
         <form asp-action="RandomTask" method="post">
             <div class="alert alert-danger" role="alert">
                 <b>Zła odpowiedź!</b>
             </div>
             @foreach (var task in Model.TaskGapsABC)
             {
-                <div class="container">
+                <div class="container box-color">
                     <div class="row align-items-start border">
                         <div class="col-sm-12 border">
                             <h4>@task.TaskName</h4>
@@ -92,14 +90,13 @@ else if (ViewBag.False == false)
 else if (ViewBag.Success == true)
 {
     <center>
-        <h2>Egzamin 8 klasisty - Angielski</h2>
         <form asp-action="RandomTask" method="post">
             <div class="alert alert-success" role="alert">
                 <b>Poprawna odpowiedź!</b>
             </div>
             @foreach (var task in Model.TaskGapsABC)
             {
-                <div class="container">
+                <div class="container box-color">
                     <div class="row align-items-start border">
                         <div class="col-sm-12 border">
                             <h4>@task.TaskName</h4>

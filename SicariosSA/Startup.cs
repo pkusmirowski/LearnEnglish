@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using SicariosSA.Models;
 using SicariosSA.Services;
+using System.IO;
 
 namespace SicariosSA
 {
@@ -26,6 +28,7 @@ namespace SicariosSA
             services.AddTransient<TaskService>();
             services.AddDistributedMemoryCache();
             services.AddSession();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +45,7 @@ namespace SicariosSA
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();

@@ -87,20 +87,18 @@ namespace SicariosSA.Services
 
             int answersCounter = 0;
 
-            for(int i = 0; i < answer.Length; i++)
+            for (int i = 0; i < answer.Length; i++)
             {
-                if(!String.IsNullOrEmpty(answer[i]))
+                if (!String.IsNullOrEmpty(answer[i]))
                 {
                     correctAnswersText[answersCounter] = answerText[i];
                     answersCounter++;
                 }
             }
 
-            
             var currentTask = viewModel.TaskGaps.FirstOrDefault();
 
             var answers = _context.TasksGapsCorrectAnswers.Where(x => x.IdTasksGaps == currentTask.Id).ToList();
-
 
             int counter = 0;
 
