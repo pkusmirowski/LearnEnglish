@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -182,6 +184,11 @@ namespace SicariosSA.Models
             modelBuilder.Entity<TasksGapsZabccorrectAnswer>(entity =>
             {
                 entity.Property(e => e.Number).IsUnicode(false);
+
+                entity.HasOne(d => d.IdTasksGapsAbcNavigation)
+                    .WithMany(p => p.TasksGapsZabccorrectAnswers)
+                    .HasForeignKey(d => d.IdTasksGapsAbc)
+                    .HasConstraintName("FK_TasksGapsZABCCorrectAnswer_TasksGapsZABC");
 
                 entity.HasOne(d => d.IdTasksGapsAbcpossibleAnswerNavigation)
                     .WithMany(p => p.TasksGapsZabccorrectAnswers)

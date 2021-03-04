@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
@@ -18,7 +19,12 @@ namespace SicariosSA.Models
         public string Number { get; set; }
         [Column("idTasksGapsABCPossibleAnswer")]
         public int? IdTasksGapsAbcpossibleAnswer { get; set; }
+        [Column("idTasksGapsABC")]
+        public int? IdTasksGapsAbc { get; set; }
 
+        [ForeignKey(nameof(IdTasksGapsAbc))]
+        [InverseProperty(nameof(TasksGapsZabc.TasksGapsZabccorrectAnswers))]
+        public virtual TasksGapsZabc IdTasksGapsAbcNavigation { get; set; }
         [ForeignKey(nameof(IdTasksGapsAbcpossibleAnswer))]
         [InverseProperty(nameof(TasksGapsZabcpossibleAnswer.TasksGapsZabccorrectAnswers))]
         public virtual TasksGapsZabcpossibleAnswer IdTasksGapsAbcpossibleAnswerNavigation { get; set; }

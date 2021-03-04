@@ -83,9 +83,24 @@ namespace SicariosSA.Services
                 return 0;
             }
 
+            string[] correctAnswersText = new string[answer.Length];
+
+            int answersCounter = 0;
+
+            for(int i = 0; i < answer.Length; i++)
+            {
+                if(!String.IsNullOrEmpty(answer[i]))
+                {
+                    correctAnswersText[answersCounter] = answerText[i];
+                    answersCounter++;
+                }
+            }
+
+            
             var currentTask = viewModel.TaskGaps.FirstOrDefault();
 
             var answers = _context.TasksGapsCorrectAnswers.Where(x => x.IdTasksGaps == currentTask.Id).ToList();
+
 
             int counter = 0;
 
@@ -93,7 +108,7 @@ namespace SicariosSA.Services
 
             foreach (var an in answers)
             {
-                correctAnswers[counter] = an.Number == answer[counter];
+                correctAnswers[counter] = an.IdTasksPossibleAnswerNavigation.PossibleAnswer == correctAnswersText[counter];
                 counter++;
             }
             var numCorrectAnswers = _context.TasksGapsCorrectAnswers.Where(x => x.IdTasksGaps == currentTask.Id).Count();
@@ -138,7 +153,7 @@ namespace SicariosSA.Services
 
             var currentTask = viewModel.TaskGapsABC.FirstOrDefault();
 
-            var answers = _context.TasksGapsZabccorrectAnswers.Where(x => x.Id == currentTask.Id).ToList();
+            var answers = _context.TasksGapsZabccorrectAnswers.Where(x => x.IdTasksGapsAbc == currentTask.Id).ToList();
 
             int counter = 0;
 
@@ -146,10 +161,10 @@ namespace SicariosSA.Services
 
             foreach (var an in answers)
             {
-                correctAnswers[counter] = an.Number == answer[counter];
+                correctAnswers[counter] = an.IdTasksGapsAbcpossibleAnswerNavigation.PossibleAnswer == answer[counter];
                 counter++;
             }
-            var numCorrectAnswers = _context.TasksGapsZabccorrectAnswers.Where(x => x.Id == currentTask.Id).Count();
+            var numCorrectAnswers = _context.TasksGapsZabccorrectAnswers.Where(x => x.IdTasksGapsAbc == currentTask.Id).Count();
 
             if (correctAnswers.Count(c => c) == numCorrectAnswers)
             {
@@ -263,9 +278,6 @@ namespace SicariosSA.Services
                 }
                 counter++;
             }
-
-
-            int wartownik = 0;
 
             if (correctAnswers.Count(c => c) == answerNumber.Count)
             {

@@ -147,3 +147,4 @@ C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.p
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.genruntimeconfig.cache
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Home\AudioTaskGaps.cshtml.g.cs
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Home\DialogueTaskGaps.cshtml.g.cs
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.csprojAssemblyReference.cache

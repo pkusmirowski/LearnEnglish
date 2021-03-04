@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
@@ -11,6 +13,7 @@ namespace SicariosSA.Models
     {
         public TasksGapsZabc()
         {
+            TasksGapsZabccorrectAnswers = new HashSet<TasksGapsZabccorrectAnswer>();
             TasksGapsZabcpossibleAnswers = new HashSet<TasksGapsZabcpossibleAnswer>();
         }
 
@@ -24,6 +27,8 @@ namespace SicariosSA.Models
         [Column("textToFill")]
         public string TextToFill { get; set; }
 
+        [InverseProperty(nameof(TasksGapsZabccorrectAnswer.IdTasksGapsAbcNavigation))]
+        public virtual ICollection<TasksGapsZabccorrectAnswer> TasksGapsZabccorrectAnswers { get; set; }
         [InverseProperty(nameof(TasksGapsZabcpossibleAnswer.IdTasksGapsAbcNavigation))]
         public virtual ICollection<TasksGapsZabcpossibleAnswer> TasksGapsZabcpossibleAnswers { get; set; }
     }
