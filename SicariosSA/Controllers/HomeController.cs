@@ -20,10 +20,13 @@ namespace SicariosSA.Controllers
             var vm = _taskService.GetTaskABC();
             if (_taskService.TaskABCCheckAnswer(vm, answer) == 1)
             {
+                ViewBag.GoodA = answer;
                 ViewBag.Success = true;
             }
             else if (_taskService.TaskABCCheckAnswer(vm, answer) == 2)
             {
+                ViewBag.GoodA = _taskService.TaskABCGetCorrectAnswer(vm);
+                ViewBag.BadA = answer;
                 ViewBag.False = false;
             }
             else
@@ -36,7 +39,7 @@ namespace SicariosSA.Controllers
 
         public IActionResult RandomTask()
         {
-            int randomTask = MathFunctions.RandomNumber(0, 4);
+            int randomTask = MathFunctions.RandomNumber(0, 5);
 
             if (randomTask == 0)
             {
@@ -53,6 +56,10 @@ namespace SicariosSA.Controllers
             else if (randomTask == 3)
             {
                 return RedirectToAction("AudioTaskGaps");
+            }
+            else if (randomTask == 4)
+            {
+                return RedirectToAction("DialogueTaskGaps");
             }
 
             return View();

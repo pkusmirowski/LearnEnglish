@@ -132,7 +132,7 @@ else if (ViewBag.Success == true)
     // selektor będzie pasował do wszystkich kontrolek wejściowych typu: checkbox
     // i dołącz moduł obsługi zdarzenia kliknięcia
     $("input:checkbox").on('click', function () {
-        // in the handler, 'this' refers to the box clicked on
+        // w module obsługi 'this' odnosi się do klikniętego pola
         var $box = $(this);
         if ($box.is(":checked")) {
             // nazwa skrzynki jest pobierana za pomocą metody .attr ()

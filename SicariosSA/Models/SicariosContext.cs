@@ -103,10 +103,7 @@ namespace SicariosSA.Models
                     .HasConstraintName("FK_DialogueTasksGapsCorrectAnswer_DialogueTasksGaps");
             });
 
-            modelBuilder.Entity<TasksAbc>(entity =>
-            {
-                entity.Property(e => e.TaskName).IsUnicode(false);
-            });
+            modelBuilder.Entity<TasksAbc>(entity => entity.Property(e => e.TaskName).IsUnicode(false));
 
             modelBuilder.Entity<TasksAbcanswer>(entity =>
             {
@@ -194,10 +191,7 @@ namespace SicariosSA.Models
                     .HasConstraintName("FK_TasksGapsZABCCorrectAnswer_TasksGapsZABCPossibleAnswer");
             });
 
-            modelBuilder.Entity<TasksGapsZabcpack>(entity =>
-            {
-                entity.Property(e => e.Abcnumber).IsUnicode(false);
-            });
+            modelBuilder.Entity<TasksGapsZabcpack>(entity => entity.Property(e => e.Abcnumber).IsUnicode(false));
 
             modelBuilder.Entity<TasksGapsZabcpossibleAnswer>(entity =>
             {

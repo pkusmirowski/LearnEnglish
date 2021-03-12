@@ -37,6 +37,12 @@ namespace SicariosSA.Services
             };
         }
 
+        public string TaskABCGetCorrectAnswer(TasksABCViewModel viewModel)
+        {
+            var currentTask = viewModel.TaskABC.FirstOrDefault();
+            return currentTask.CorrectAnswer;
+        }
+
         public int TaskABCCheckAnswer(TasksABCViewModel viewModel, string answer)
         {
             if (answer == null)

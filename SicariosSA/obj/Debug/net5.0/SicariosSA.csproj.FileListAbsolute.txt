@@ -147,7 +147,6 @@ C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.p
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.genruntimeconfig.cache
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Home\AudioTaskGaps.cshtml.g.cs
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\Razor\Views\Home\DialogueTaskGaps.cshtml.g.cs
-C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.csprojAssemblyReference.cache
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Antiforgery.dll
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Authentication.Abstractions.dll
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\refs\Microsoft.AspNetCore.Authentication.Cookies.dll
@@ -433,3 +432,4 @@ C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\Microsoft.As
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.csprojAssemblyReference.cache
