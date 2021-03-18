@@ -75,7 +75,7 @@ body {
     overflow-x: hidden;
     transition: all 200ms linear;
     font-family: 'Lato', sans-serif !important;
-    height: 900px;
+    height: 940px;
 }
 
 .footer {
@@ -867,6 +867,11 @@ h1 span:nth-child(15) {
 .bigfont {
     font-weight: 900;
     /*text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;*/
+}
+
+.textp{
+    padding-top: 10px;
+    text-align: center;
 }
 
 /* #Media

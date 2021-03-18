@@ -432,4 +432,3 @@ C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\Microsoft.As
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net5.0\SicariosSA.csprojAssemblyReference.cache

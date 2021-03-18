@@ -3,6 +3,7 @@ using SicariosSA.Functions;
 using SicariosSA.Models;
 using SicariosSA.Services;
 using System.Diagnostics;
+using System.Linq;
 
 namespace SicariosSA.Controllers
 {
@@ -128,13 +129,16 @@ namespace SicariosSA.Controllers
         public IActionResult DialogueTaskGaps(string[] answer)
         {
             var vm = _taskService.GetDialogueTasksGaps();
-
             if (_taskService.DialogueTaskGapsCheckAnswer(vm, answer) == 1)
             {
+                ViewBag.AnswerG = answer;
+                ViewBag.Count = answer.Length;
                 ViewBag.Success = true;
             }
             else if (_taskService.DialogueTaskGapsCheckAnswer(vm, answer) == 2)
             {
+                ViewBag.AnswerB = answer;
+                ViewBag.Count = answer.Length;
                 ViewBag.False = false;
             }
             else
