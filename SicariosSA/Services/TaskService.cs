@@ -1,6 +1,7 @@
 ﻿using SicariosSA.Models;
 using SicariosSA.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SicariosSA.Services
@@ -125,6 +126,26 @@ namespace SicariosSA.Services
             {
                 return 2;
             }
+        }
+
+        public List<TasksGapsCorrectAnswer> GetCorrectAnswersTaskGaps(TasksGapsViewModel viewModel, string[] answer, string[] answerText)
+        {
+            string[] correctAnswersText = new string[answer.Length];
+
+            int answersCounter = 0;
+
+            for (int i = 0; i < answer.Length; i++)
+            {
+                if (!String.IsNullOrEmpty(answer[i]))
+                {
+                    correctAnswersText[answersCounter] = answerText[i];
+                    answersCounter++;
+                }
+            }
+
+            var currentTask = viewModel.TaskGaps.FirstOrDefault();
+
+            return _context.TasksGapsCorrectAnswers.Where(x => x.IdTasksGaps == currentTask.Id).ToList();
         }
 
         public TasksGapsABCViewModel GetTaskGapsABC()

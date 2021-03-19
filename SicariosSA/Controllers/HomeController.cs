@@ -72,10 +72,15 @@ namespace SicariosSA.Controllers
 
             if (_taskService.TaskGapsCheckAnswer(vm, answer, answerText) == 1)
             {
+                var correctAnswers = _taskService.GetCorrectAnswersTaskGaps(vm, answer, answerText);
+                ViewBag.correctAnswers = correctAnswers;
+                ViewBag.AnswerG = answer;
                 ViewBag.Success = true;
             }
             else if (_taskService.TaskGapsCheckAnswer(vm, answer, answerText) == 2)
             {
+                var correctAnswers = _taskService.GetCorrectAnswersTaskGaps(vm, answer, answerText);
+                ViewBag.AnswerB = correctAnswers;
                 ViewBag.False = false;
             }
             else
@@ -92,10 +97,12 @@ namespace SicariosSA.Controllers
 
             if (_taskService.TaskGapsABCCheckAnswer(vm, answer) == 1)
             {
+                ViewBag.AnswerG = answer;
                 ViewBag.Success = true;
             }
             else if (_taskService.TaskGapsABCCheckAnswer(vm, answer) == 2)
             {
+                ViewBag.AnswerB = answer;
                 ViewBag.False = false;
             }
             else
