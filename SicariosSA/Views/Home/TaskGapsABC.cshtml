@@ -66,6 +66,23 @@ else if (ViewBag.False == false)
                         <div class="col-sm-12 border">
                             <h5>@task.TextToFill</h5>
                         </div>
+                        <div class="col-sm-12 border">
+                            <h5>Twoje odpowiedzi:</h5>
+                        </div>
+
+                        @foreach (var taskAnswer in task.PossibleAnswer)
+                        {
+                            <div class="col-sm-4">
+                                <p>Luka @i</p>
+                                <h6><input type="checkbox" class="radio" name="answer[@i][]" value="@taskAnswer.PossibleAnswer" /> @taskAnswer.PossibleAnswer</h6>
+                                <br />
+                            </div>
+                            flag++;
+                            if ((flag % 3) == 0)
+                            {
+                                i++;
+                            }
+                        }
                         @foreach (var taskAnswer in task.PossibleAnswer)
                         {
                             <div class="col-sm-4 border border-secondary">

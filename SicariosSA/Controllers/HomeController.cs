@@ -40,7 +40,7 @@ namespace SicariosSA.Controllers
 
         public IActionResult RandomTask()
         {
-            int randomTask = MathFunctions.RandomNumber(0, 5);
+            int randomTask = MathFunctions.RandomNumber(0, 4);
 
             if (randomTask == 0)
             {
@@ -56,12 +56,12 @@ namespace SicariosSA.Controllers
             }
             else if (randomTask == 3)
             {
-                return RedirectToAction("AudioTaskGaps");
-            }
-            else if (randomTask == 4)
-            {
                 return RedirectToAction("DialogueTaskGaps");
             }
+          //else if (randomTask == 3)
+          //{
+          //  return RedirectToAction("AudioTaskGaps");
+          //}
 
             return View();
         }
