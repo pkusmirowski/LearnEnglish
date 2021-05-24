@@ -8,7 +8,7 @@ Backend: .NET 6 MVC, Entity Framework, Razor pages
 
 Database: MS SQL Server
 
-Frontend: Bootstrap (HTML 5 + CSS 3), Javascript 
+Frontend: Bootstrap (HTML5 + CSS3), Javascript 
 
 
 <img src="screenshots/1.png" width="1000">
