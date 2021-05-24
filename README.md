@@ -4,7 +4,7 @@ Aplikacja do nauki języka angielskiego.
 
 Technologie:
 
-Backend: .NET 6.0 MVC, Entity Framework, Razor pages
+Backend: .NET 6 MVC, Entity Framework, Razor pages
 
 Database: MS SQL Server
 
