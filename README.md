@@ -3,9 +3,12 @@
 Aplikacja do nauki języka angielskiego.
 
 Technologie:
-C# Razor pages Entity Framework
-MS SQL Server
-Bootstrap (HTML 5 + CSS 3) Javascript 
+
+Backend: C#, Entity Framework, Razor pages
+
+Database: MS SQL Server
+
+Frontend: Bootstrap (HTML 5 + CSS 3), Javascript 
 
 
 <img src="screenshots/1.png" width="1000">
