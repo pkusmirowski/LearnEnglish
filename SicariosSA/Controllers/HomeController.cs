@@ -3,7 +3,6 @@ using SicariosSA.Functions;
 using SicariosSA.Models;
 using SicariosSA.Services;
 using System.Diagnostics;
-using System.Linq;
 
 namespace SicariosSA.Controllers
 {
@@ -58,10 +57,10 @@ namespace SicariosSA.Controllers
             {
                 return RedirectToAction("DialogueTaskGaps");
             }
-          //else if (randomTask == 3)
-          //{
-          //  return RedirectToAction("AudioTaskGaps");
-          //}
+            //else if (randomTask == 3)
+            //{
+            //  return RedirectToAction("AudioTaskGaps");
+            //}
 
             return View();
         }
