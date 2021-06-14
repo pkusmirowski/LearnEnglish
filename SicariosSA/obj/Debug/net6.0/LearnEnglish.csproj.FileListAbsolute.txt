@@ -419,3 +419,4 @@ C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net6.0\LearnEnglish
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net6.0\ref\LearnEnglish.dll
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net6.0\LearnEnglish.pdb
 C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net6.0\LearnEnglish.genruntimeconfig.cache
+C:\Users\Paweł\source\repos\SicariosSA\SicariosSA\obj\Debug\net6.0\LearnEnglish.csproj.AssemblyReference.cache
