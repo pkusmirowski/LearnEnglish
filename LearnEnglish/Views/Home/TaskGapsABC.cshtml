@@ -1,0 +1,166 @@
+﻿@model LearnEnglish.ViewModels.TasksGapsABCViewModel
+@{
+    ViewData["Title"] = "Zadanie z lukami ABC";
+}
+
+@{
+    int i = 0;
+    int flag = 0;
+}
+
+@if (ViewBag.Standard == true)
+{
+<center>
+    <form asp-action="TaskGapsABC" method="post">
+        @foreach (var task in Model.TaskGapsABC)
+        {
+            <div class="container box-color">
+                <div class="row border">
+                    <div class="col-sm-12 border">
+                        <h4>@task.TaskName</h4>
+                    </div>
+                    <div class="col-sm-12 border">
+                        <h5>@task.TextToFill</h5>
+                    </div>
+                    <div class="col-sm-12 border">
+                        <h5>Zaznacz poprawną odpowieź</h5>
+                    </div>
+
+                    @foreach (var taskAnswer in task.PossibleAnswer)
+                    {
+                        <div class="col-sm-4">
+                            <p>Luka @i</p>
+                            <h6><input type="checkbox" class="radio" name="answer[@i][]" value="@taskAnswer.PossibleAnswer" /> @taskAnswer.PossibleAnswer</h6>
+                            <br />
+                        </div>
+                        flag++;
+                        if ((flag % 3) == 0)
+                        {
+                            i++;
+                        }
+                    }
+                </div>
+            </div>
+        }
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Sprawdź odpowiedź" class="btn btn-primary" />
+        </div>
+    </form>
+</center>
+}
+else if (ViewBag.False == false)
+{
+    <center>
+        <form asp-action="RandomTask" method="post">
+            <div class="alert alert-danger" role="alert">
+                <b>Zła odpowiedź!</b>
+            </div>
+            @foreach (var task in Model.TaskGapsABC)
+            {
+                <div class="container box-color">
+                    <div class="row align-items-start border">
+                        <div class="col-sm-12 border">
+                            <h4>@task.TaskName</h4>
+                        </div>
+                        <div class="col-sm-12 border">
+                            <h5>@task.TextToFill</h5>
+                        </div>
+                        <div class="col-sm-12 border">
+                            <h5>Twoje odpowiedzi:</h5>
+                        </div>
+
+                        @foreach (var taskAnswer in task.PossibleAnswer)
+                        {
+                            <div class="col-sm-4">
+                                <p>Luka @i</p>
+                                <h6><input type="checkbox" class="radio" name="answer[@i][]" value="@taskAnswer.PossibleAnswer" /> @taskAnswer.PossibleAnswer</h6>
+                                <br />
+                            </div>
+                            flag++;
+                            if ((flag % 3) == 0)
+                            {
+                                i++;
+                            }
+                        }
+                        @foreach (var taskAnswer in task.PossibleAnswer)
+                        {
+                            <div class="col-sm-4 border border-secondary">
+                                <h6>@taskAnswer.PossibleAnswer</h6>
+                                <h6>@taskAnswer.PossibleAnswerPl</h6>
+                            </div>
+                        }
+                        <div class="col-sm-12 border">
+                            <h5><b>Wytłumaczenie</b></h5>
+                            <h6>@task.Explanation</h6>
+                        </div>
+                    </div>
+                </div>
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Kolejne zadanie" class="btn btn-primary" />
+            </div>
+        </form>
+    </center>
+}
+else if (ViewBag.Success == true)
+{
+    <center>
+        <form asp-action="RandomTask" method="post">
+            <div class="alert alert-success" role="alert">
+                <b>Poprawna odpowiedź!</b>
+            </div>
+            @foreach (var task in Model.TaskGapsABC)
+            {
+                <div class="container box-color">
+                    <div class="row align-items-start border">
+                        <div class="col-sm-12 border">
+                            <h4>@task.TaskName</h4>
+                        </div>
+                        <div class="col-sm-12 border">
+                            <h5>@task.TextToFill</h5>
+                        </div>
+                        @foreach (var taskAnswer in task.PossibleAnswer)
+                        {
+                            <div class="col-sm-4 border border-secondary">
+                                <h6>@taskAnswer.PossibleAnswer</h6>
+                                <h6>@taskAnswer.PossibleAnswerPl</h6>
+                            </div>
+                        }
+                        <div class="col-sm-12 border">
+                            <h5><b>Wytłumaczenie</b></h5>
+                            <h6>@task.Explanation</h6>
+                        </div>
+
+                    </div>
+                </div>
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Kolejne zadanie" class="btn btn-primary" />
+            </div>
+        </form>
+    </center>
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    // selektor będzie pasował do wszystkich kontrolek wejściowych typu: checkbox
+    // i dołącz moduł obsługi zdarzenia kliknięcia
+    $("input:checkbox").on('click', function () {
+        // w module obsługi 'this' odnosi się do klikniętego pola
+        var $box = $(this);
+        if ($box.is(":checked")) {
+            // nazwa skrzynki jest pobierana za pomocą metody .attr ()
+            // tak jak zakłada się i oczekuje się, że będzie niezmienny
+            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+            // z drugiej strony zmieni się stan zaznaczenia grupy / pola
+            // a bieżąca wartość jest pobierana przy użyciu metody .prop ()
+            $(group).prop("checked", false);
+            $box.prop("checked", true);
+        } else {
+            $box.prop("checked", false);
+        }
+    });
+</script>

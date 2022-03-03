@@ -1,0 +1,358 @@
+﻿@model LearnEnglish.ViewModels.TasksABCViewModel
+@{ ViewData["Title"] = "Strona główna";}
+
+@if (ViewBag.Standard == true)
+{
+    <center>
+        <form asp-action="Index" method="post">
+            @foreach (var task in Model.TaskABC)
+            {
+                <div class="container box-color">
+                    <div class="row border">
+                        <div class="col-sm-12 margin-zt">
+                            <h4><b>Zadanie</b></h4>
+                            <h5>@task.Question</h5>
+                        </div>
+                        <div class="col-sm-4">
+                            <h5><b>A</b></h5>
+                            <h6><input type="checkbox" name="answer" value="@task.Option1" onclick="MutExChkList(this);" /> @task.Option1</h6>
+                        </div>
+                        <div class="col-sm-4">
+                            <h5><b>B</b></h5>
+                            <h6><input type="checkbox" name="answer" value="@task.Option2" onclick="MutExChkList(this);" /> @task.Option2</h6>
+                        </div>
+                        <div class="col-sm-4">
+                            <h5><b>C</b></h5>
+                            <h6><input type="checkbox" name="answer" value="@task.Option3" onclick="MutExChkList(this);" /> @task.Option3</h6>
+                        </div>
+                    </div>
+                </div>
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Sprawdź odpowiedź" class="btn btn-primary" />
+            </div>
+        </form>
+    </center>
+}
+else if (ViewBag.False == false)
+{
+<center>
+    <form asp-action="RandomTask" method="post">
+        <div class="alert alert-danger" role="alert">
+            <b>Zła odpowiedź!</b>
+        </div>
+        @foreach (var task in Model.TaskABC)
+        {
+            <div class="container box-color">
+                <div class="row align-items-start border">
+                    <div class="col-sm-12 margin-zt">
+                        <h4><b>Zadanie</b></h4>
+                    </div>
+                     <div class="col-sm-12 margin-zt">
+                        <h4>@task.Question</h4>
+                    </div>               
+                    <div class="row margin-zt">
+                        <div class="col-sm-4">
+                            <h5><b>A</b></h5>
+                            @if(@task.Option1 == ViewBag.GoodA)
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label-3">
+                                        <input type="checkbox" class="custom-control-input" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h6 class="text-success"><b>@task.Option1</b></h6>
+                            }
+                            else if(@task.Option1 == ViewBag.BadA)
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label-4">
+                                        <input type="checkbox" class="custom-control-input-2" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <p>Twoja odpowiedź</p>
+                                <h5 class="text-danger bigfont">@task.Option1</h5>      
+                            }
+                            else
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label-2">
+                                        <input type="checkbox" class="custom-control-input-2" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h6 class="text-danger">@task.Option1</h6>
+                            }                           
+                        </div>
+                        <div class="col-sm-4">
+                            <h5><b>B</b></h5>
+                            @if(@task.Option2 == ViewBag.GoodA)
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label-3">
+                                        <input type="checkbox" class="custom-control-input" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h6 class="text-success"><b>@task.Option2</b></h6>
+                            }
+                            else if(@task.Option2 == ViewBag.BadA)
+                            {
+                                
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label-4">
+                                        <input type="checkbox" class="custom-control-input-2" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h5 class="text-danger bigfont">@task.Option1</h5>                                    
+                            }
+                            else
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label-2">
+                                        <input type="checkbox" class="custom-control-input-2" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h6 class="text-danger">@task.Option2</h6>
+                            }  
+                        </div>
+                        <div class="col-sm-4">
+                            <h5><b>C</b></h5>
+                            @if(@task.Option3 == ViewBag.GoodA)
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label-3">
+                                        <input type="checkbox" class="custom-control-input" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h6 class="text-success"><b>@task.Option3</b></h6>
+                            }
+                            else if(@task.Option3 == ViewBag.BadA)
+                            {
+                                
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label-4">
+                                        <input type="checkbox" class="custom-control-input-2" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h5 class="text-danger bigfont">@task.Option3</h5>                                    
+                            }
+                            else
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label-2">
+                                        <input type="checkbox" class="custom-control-input-2" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h6 class="text-danger">@task.Option3</h6>
+                            } 
+                        </div>
+                         <div class="col-sm-12 margin-zt">
+                             <h4>Polskie odpowiedzi + wytłumaczenie</h4>
+                        </div>
+                         <div class="col-sm-4">
+                            <h5><b>A-PL</b></h5>
+                             @if(@task.Option1 == ViewBag.GoodA)
+                            {
+                                <h6 class="text-success"><b>@task.Option1Pl</b></h6>
+                            }
+                            else
+                            {
+                                <h6 class="text-danger">@task.Option1Pl</h6>
+                            }  
+                        </div>
+                        <div class="col-sm-4">
+                            <h5><b>B-PL</b></h5>
+                            @if(@task.Option2 == ViewBag.GoodA)
+                            {
+                                <h6 class="text-success"><b>@task.Option2Pl</b></h6>
+                            }
+                            else
+                            {
+                                <h6 class="text-danger">@task.Option2Pl</h6>
+                            }  
+                        </div>
+                        <div class="col-sm-4">
+                            <h5><b>C-PL</b></h5>
+                             @if(@task.Option3 == ViewBag.GoodA)
+                            {
+                                <h6 class="text-success"><b>@task.Option3Pl</b></h6>
+                            }
+                            else
+                            {
+                                <h6 class="text-danger">@task.Option3Pl</h6>
+                            }  
+                        </div>
+                    </div>
+                    <div class="col-sm-12 border textp">
+                        <h5 class="margin-zt"><b>Wytłumaczenie</b></h5>
+                        <h6>@task.Explanation</h6>
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Kolejne zadanie" class="btn btn-primary" />
+        </div>
+    </form>
+</center>
+}
+else if (ViewBag.Success == true)
+{
+<center>
+    <form asp-action="RandomTask" method="post">
+        <div class="alert alert-success" role="alert">
+            <b>Poprawna odpowiedź!</b>
+        </div>
+        @foreach (var task in Model.TaskABC)
+        {
+            <div class="container box-color">
+                <div class="row align-items-start border">
+                    <div class="col-sm-12 margin-zt">
+                        <h4><b>Zadanie</b></h4>
+                    </div>
+                     <div class="col-sm-12 margin-zt">
+                        <h4>@task.Question</h4>
+                    </div>               
+                    <div class="row margin-zt">
+                        <div class="col-sm-4">
+                            <h5><b>A</b></h5>
+                            @if(@task.Option1 == ViewBag.GoodA)
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="custom-control-input" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h5 class="text-success bigfont"><b>@task.Option1</b></h5>
+                            }
+                            else
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label-2">
+                                        <input type="checkbox" class="custom-control-input-2" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h6 class="text-danger">@task.Option1</h6>
+                            }                           
+                        </div>
+                        <div class="col-sm-4">
+                            <h5><b>B</b></h5>
+                            @if(@task.Option2 == ViewBag.GoodA)
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="custom-control-input" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h5 class="text-success bigfont"><b>@task.Option2</b></h5>
+                            }
+                            else
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label-2">
+                                        <input type="checkbox" class="custom-control-input-2" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h6 class="text-danger">@task.Option2</h6>
+                            }  
+                        </div>
+                        <div class="col-sm-4">
+                            <h5><b>C</b></h5>
+                            @if(@task.Option3 == ViewBag.GoodA)
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="custom-control-input" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h5 class="text-success bigfont"><b>@task.Option3</b></h5>
+                            }
+                            else
+                            {
+                                <div class="checkbox-container">
+                                    <label class="checkbox-label-2">
+                                        <input type="checkbox" class="custom-control-input-2" checked disabled>>
+                                        <span class="checkbox-custom"></span>
+                                    </label>
+                                </div>
+                                <h6 class="text-danger">@task.Option3</h6>
+                            } 
+                        </div>
+                         <div class="col-sm-12 margin-zt">
+                             <h4>Polskie odpowiedzi + wytłumaczenie</h4>
+                        </div>
+                         <div class="col-sm-4">
+                            <h5><b>A-PL</b></h5>
+                             @if(@task.Option1 == ViewBag.GoodA)
+                            {
+                                <h6 class="text-success"><b>@task.Option1Pl</b></h6>
+                            }
+                            else
+                            {
+                                <h6 class="text-danger">@task.Option1Pl</h6>
+                            }  
+                        </div>
+                        <div class="col-sm-4">
+                            <h5><b>B-PL</b></h5>
+                            @if(@task.Option2 == ViewBag.GoodA)
+                            {
+                                <h6 class="text-success"><b>@task.Option2Pl</b></h6>
+                            }
+                            else
+                            {
+                                <h6 class="text-danger">@task.Option2Pl</h6>
+                            }  
+                        </div>
+                        <div class="col-sm-4">
+                            <h5><b>C-PL</b></h5>
+                             @if(@task.Option3 == ViewBag.GoodA)
+                            {
+                                <h6 class="text-success"><b>@task.Option3Pl</b></h6>
+                            }
+                            else
+                            {
+                                <h6 class="text-danger">@task.Option3Pl</h6>
+                            }  
+                        </div>
+                    </div>
+                    <div class="col-sm-12 border textp">
+                        <h5 class="margin-zt"><b>Wytłumaczenie</b></h5>
+                        <h6>@task.Explanation</h6>
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+        <div class="form-group">
+            <input type="submit" value="Kolejne zadanie" class="btn btn-primary" />
+        </div>
+    </form>
+</center>
+}
+
+<script type="text/javascript">
+    function MutExChkList(chk) {
+        var chkList = chk.parentNode.parentNode.parentNode;
+        var chks = chkList.getElementsByTagName("input");
+        for (var i = 0; i < chks.length; i++) {
+            if (chks[i] != chk && chk.checked) {
+                chks[i].checked = false;
+            }
+        }
+    }
+</script>

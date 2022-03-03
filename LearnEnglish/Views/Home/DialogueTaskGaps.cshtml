@@ -1,0 +1,173 @@
+﻿@model LearnEnglish.ViewModels.DialogueTasksGapsViewModel
+
+@{ ViewData["Title"] = "Dialog do uzupełnienia"; }
+@if (ViewBag.Standard == true)
+{
+    <center>
+        <form asp-action="DialogueTaskGaps" method="post">
+            @foreach (var task in Model.DialogueTaskGaps)
+            {
+                <div class="container box-color">
+                    <div class="row border">
+                        <div class="col-sm-12 margin-zt">
+                            <h4>@task.TaskName</h4>
+                        </div>
+                        <div class="col-sm-12 margin-zt">
+                            <h5>@task.TextToFill</h5>
+                        </div>
+                        <div class="col-sm-12 margin-zt">
+                            <h5>Wpisz odpowiedzi:</h5>
+                        </div>
+                        @for (int i = 1; i <= @task.AnswerNumber; i++)
+                        {
+                            <div class="col-sm-6">
+                                Luka @i
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" id="answer" name="answer" />
+                                <br />
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Sprawdź odpowiedź" class="btn btn-primary" />
+            </div>
+        </form>
+    </center> }
+else if (ViewBag.False == false)
+{
+    <center>
+        <form asp-action="RandomTask" method="post">
+            <div class="alert alert-danger" role="alert">
+                <b>Zła odpowiedź!</b>
+            </div>
+            @foreach (var task in Model.DialogueTaskGaps)
+            {
+                <div class="container box-color">
+                    <div class="row border">
+                        <div class="col-sm-12 margin-zt">
+                            <h4>@task.TaskName</h4>
+                        </div>
+                        <div class="col-sm-12 margin-zt">
+                            <h5>@task.TextToFill</h5>
+                        </div>
+                        <div class="col-sm-12 margin-zt">
+                            <h5>Twoje odpowiedzi:</h5>
+                        </div>
+                        @{
+                            //Do rozkminienia, aby dobrze wyświetlało kolory odpowiedzi
+                            int counter = 0;
+                            int flag = 0;
+                            foreach (var taskAnswer in task.CorrectAnswers)
+                            {
+
+                                    if (taskAnswer.CorrectAnswer == ViewBag.AnswerB[flag])
+                                    {
+                                         counter++;  
+                                        <div class="col-sm-6 border border-secondary text-success textp">                                               
+                                            <h5><b>@counter: @taskAnswer.CorrectAnswer</b></h5>                                        
+                                        </div>
+                                        
+                                    }  
+                                    else
+                                    {
+                                        counter++;
+                                        <div class="col-sm-6 border border-secondary text-danger textp">                                               
+                                            <h5><b>@counter: @ViewBag.AnswerB[flag]</b></h5>                                        
+                                        </div>
+                                        
+                                    }
+                                    flag++;
+                                    if(ViewBag.Count == counter)
+                                    {
+                                        break;
+                                    }
+                            }                                 
+                        }                             
+                        <div class="col-sm-12 margin-zt">
+                            <h5>Poprawne odpowiedzi:</h5>
+                        </div>
+                        @foreach (var taskAnswer in task.CorrectAnswers)
+                        {
+                            <div class="col-sm-6 border border-secondary textp">
+                                <h6>@taskAnswer.CorrectAnswer</h6>
+                                <h6>@taskAnswer.CorrectAnswerPl</h6>
+                            </div>
+                        }
+                        <div class="col-sm-12 border textp">
+                            <h5><b>Wytłumaczenie:</b></h5>
+                            <h6>@task.Explanation</h6>
+                        </div>
+                    </div>
+                  </div>
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Kolejne zadanie" class="btn btn-primary" />
+            </div>
+        </form>
+    </center> }
+else if (ViewBag.Success == true)
+{
+    <center>
+        <form asp-action="RandomTask" method="post">
+            <div class="alert alert-success" role="alert">
+                <b>Poprawna odpowiedź!</b>
+            </div>
+            @foreach (var task in Model.DialogueTaskGaps)
+            {
+                <div class="container box-color">
+                    <div class="row border">
+                        <div class="col-sm-12 margin-zt">
+                            <h4>@task.TaskName</h4>
+                        </div>
+                        <div class="col-sm-12 margin-zt">
+                            <h5>@task.TextToFill</h5>
+                        </div>
+                        <div class="col-sm-12 margin-zt">
+                            <h5>Twoje odpowiedzi:</h5>
+                        </div>
+                        @{
+                            int counter = 0;
+                            foreach (var taskAnswer in task.CorrectAnswers)
+                            {
+                                
+                                    for (int x = 0; x < ViewBag.Count; x++)
+                                    {
+                                        if (taskAnswer.CorrectAnswer == ViewBag.AnswerG[x])
+                                        {
+                                            counter++;
+                                            <div class="col-sm-6 border border-secondary text-success textp">                                               
+                                                <h5><b>@counter: @taskAnswer.CorrectAnswer</b></h5>                                        
+                                            </div>
+                                        }
+                                    }
+                            }                              
+                        }                             
+                        <div class="col-sm-12 margin-zt">
+                            <h5>Poprawne odpowiedzi:</h5>
+                        </div>
+                        @foreach (var taskAnswer in task.CorrectAnswers)
+                        {
+                            <div class="col-sm-6 border border-secondary textp">
+                                <h6>@taskAnswer.CorrectAnswer</h6>
+                                <h6>@taskAnswer.CorrectAnswerPl</h6>
+                            </div>
+                        }
+                        <div class="col-sm-12 border textp">
+                            <h5><b>Wytłumaczenie:</b></h5>
+                            <h6>@task.Explanation</h6>
+                        </div>
+                    </div>
+                  </div>
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Kolejne zadanie" class="btn btn-primary" />
+            </div>
+        </form>
+    </center>
+}
