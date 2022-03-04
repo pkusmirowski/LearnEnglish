@@ -69,7 +69,6 @@ else if (ViewBag.False == false)
                         <div class="col-sm-12 border">
                             <h5>Twoje odpowiedzi:</h5>
                         </div>
-
                         @foreach (var taskAnswer in task.PossibleAnswer)
                         {
                             <div class="col-sm-4">
@@ -121,18 +120,42 @@ else if (ViewBag.Success == true)
                         <div class="col-sm-12 border">
                             <h5>@task.TextToFill</h5>
                         </div>
-                        @foreach (var taskAnswer in task.PossibleAnswer)
+                        @{int j = 0;}
+                        @while (j < 4)
                         {
-                            <div class="col-sm-4 border border-secondary">
-                                <h6>@taskAnswer.PossibleAnswer</h6>
-                                <h6>@taskAnswer.PossibleAnswerPl</h6>
-                            </div>
+                            @foreach (var taskAnswer in task.PossibleAnswer)
+                            {
+                                if (taskAnswer.PossibleAnswer == ViewBag.AnswerG[j])
+                                {
+                                    <div class="col-sm-4">
+                                        <p>Luka @j</p>
+                                        <div class="checkbox-container">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="custom-control-input" checked disabled>
+                                                <span class="checkbox-custom"></span>
+                                            </label>
+                                        </div>
+                                        <h5 class="text-success bigfont"><b>@taskAnswer.PossibleAnswer</b></h5>
+                                        <br />
+                                    </div>
+                                }
+
+                            }
+                            j++;
                         }
+                        <div class="row">
+                            @foreach (var taskAnswer in task.PossibleAnswer)
+                            {
+                                <div class="col-sm-4 border border-secondary">
+                                    <h6>@taskAnswer.PossibleAnswer</h6>
+                                    <h6>@taskAnswer.PossibleAnswerPl</h6>
+                                </div>
+                            }
+                        </div>
                         <div class="col-sm-12 border">
                             <h5><b>Wytłumaczenie</b></h5>
                             <h6>@task.Explanation</h6>
                         </div>
-
                     </div>
                 </div>
             }

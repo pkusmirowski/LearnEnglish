@@ -281,7 +281,7 @@ namespace LearnEnglish.Services
 
             foreach (var an in answers)
             {
-                if(an.CorrectAnswer == answer[counter] && an.GapNumber == counter2)
+                if (an.CorrectAnswer == answer[counter] && an.GapNumber == counter2)
                 {
                     boolList.Add(true);
                 }
@@ -293,11 +293,11 @@ namespace LearnEnglish.Services
                 counter2++;
             }
 
-            if(boolList.All(c=> c))
+            if (boolList.All(c => c))
             {
                 return 1;
             }
-            else if(boolList.Any(c=> !c))
+            else if (boolList.Any(c => !c))
             {
                 return 2;
             }

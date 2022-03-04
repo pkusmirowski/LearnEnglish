@@ -1,7 +1,6 @@
 ﻿using LearnEnglish.Functions;
 using LearnEnglish.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace LearnEnglish.Controllers
 {
