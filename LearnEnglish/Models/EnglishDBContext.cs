@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace LearnEnglish.Models
 {
@@ -16,7 +19,6 @@ namespace LearnEnglish.Models
         public virtual DbSet<AudioTasksGap> AudioTasksGaps { get; set; } = null!;
         public virtual DbSet<AudioTasksGapsCorrectAnswer> AudioTasksGapsCorrectAnswers { get; set; } = null!;
         public virtual DbSet<DialogueTasksGap> DialogueTasksGaps { get; set; } = null!;
-        public virtual DbSet<DialogueTasksGapsAnswerPack> DialogueTasksGapsAnswerPacks { get; set; } = null!;
         public virtual DbSet<DialogueTasksGapsCorrectAnswer> DialogueTasksGapsCorrectAnswers { get; set; } = null!;
         public virtual DbSet<TasksAbc> TasksAbcs { get; set; } = null!;
         public virtual DbSet<TasksAbcanswer> TasksAbcanswers { get; set; } = null!;
@@ -119,29 +121,6 @@ namespace LearnEnglish.Models
                     .HasColumnName("textToFill");
             });
 
-            modelBuilder.Entity<DialogueTasksGapsAnswerPack>(entity =>
-            {
-                entity.ToTable("DialogueTasksGapsAnswerPack");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.AnswerNumber)
-                    .IsUnicode(false)
-                    .HasColumnName("answerNumber");
-
-                entity.Property(e => e.IdDialogueTasksGaps).HasColumnName("idDialogueTasksGaps");
-
-                entity.HasOne(d => d.IdDialogueTasksGapsNavigation)
-                    .WithMany(p => p.DialogueTasksGapsAnswerPacks)
-                    .HasForeignKey(d => d.IdDialogueTasksGaps)
-                    .HasConstraintName("FK_DialogueTasksGapsAnswerPack_DialogueTasksGaps1");
-
-                entity.HasOne(d => d.IdDialogueTasksGaps1)
-                    .WithMany(p => p.DialogueTasksGapsAnswerPacks)
-                    .HasForeignKey(d => d.IdDialogueTasksGaps)
-                    .HasConstraintName("FK_DialogueTasksGapsAnswerPack_DialogueTasksGapsCorrectAnswer");
-            });
-
             modelBuilder.Entity<DialogueTasksGapsCorrectAnswer>(entity =>
             {
                 entity.ToTable("DialogueTasksGapsCorrectAnswer");
@@ -158,12 +137,10 @@ namespace LearnEnglish.Models
 
                 entity.Property(e => e.IdDialogueTasksGaps).HasColumnName("idDialogueTasksGaps");
 
-                entity.Property(e => e.IdDialogueTasksGapsAnswerPack).HasColumnName("idDialogueTasksGapsAnswerPack");
-
                 entity.HasOne(d => d.IdDialogueTasksGapsNavigation)
                     .WithMany(p => p.DialogueTasksGapsCorrectAnswers)
                     .HasForeignKey(d => d.IdDialogueTasksGaps)
-                    .HasConstraintName("FK_DialogueTasksGapsCorrectAnswer_DialogueTasksGaps");
+                    .HasConstraintName("FK_DialogueTasksGapsCorrectAnswer_DialogueTasksGaps1");
             });
 
             modelBuilder.Entity<TasksAbc>(entity =>

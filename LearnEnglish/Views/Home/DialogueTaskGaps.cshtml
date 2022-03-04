@@ -7,6 +7,7 @@
         <form asp-action="DialogueTaskGaps" method="post">
             @foreach (var task in Model.DialogueTaskGaps)
             {
+                int counter = 1;
                 <div class="container box-color">
                     <div class="row border">
                         <div class="col-sm-12 margin-zt">
@@ -17,16 +18,17 @@
                         </div>
                         <div class="col-sm-12 margin-zt">
                             <h5>Wpisz odpowiedzi:</h5>
-                        </div>
-                        @for (int i = 1; i <= @task.AnswerNumber; i++)
-                        {
+                        </div>                       
+                        @foreach (var x in @task.CorrectAnswers)
+                        {                    
                             <div class="col-sm-6">
-                                Luka @i
+                                Luka @counter
                             </div>
                             <div class="col-sm-6">
                                 <input type="text" id="answer" name="answer" />
                                 <br />
                             </div>
+                            counter++;
                         }
                     </div>
                 </div>
@@ -36,9 +38,11 @@
                 <input type="submit" value="Sprawdź odpowiedź" class="btn btn-primary" />
             </div>
         </form>
-    </center> }
+    </center>
+}
 else if (ViewBag.False == false)
 {
+    int counter2 = 1;
     <center>
         <form asp-action="RandomTask" method="post">
             <div class="alert alert-danger" role="alert">
@@ -58,7 +62,6 @@ else if (ViewBag.False == false)
                             <h5>Twoje odpowiedzi:</h5>
                         </div>
                         @{
-                            //Do rozkminienia, aby dobrze wyświetlało kolory odpowiedzi
                             int counter = 0;
                             int flag = 0;
                             foreach (var taskAnswer in task.CorrectAnswers)
@@ -93,9 +96,10 @@ else if (ViewBag.False == false)
                         @foreach (var taskAnswer in task.CorrectAnswers)
                         {
                             <div class="col-sm-6 border border-secondary textp">
-                                <h6>@taskAnswer.CorrectAnswer</h6>
-                                <h6>@taskAnswer.CorrectAnswerPl</h6>
+                                <h6>@counter2:</h6>
+                                <h6>@taskAnswer.CorrectAnswer - @taskAnswer.CorrectAnswerPl</h6>
                             </div>
+                            counter2++;
                         }
                         <div class="col-sm-12 border textp">
                             <h5><b>Wytłumaczenie:</b></h5>
@@ -119,6 +123,7 @@ else if (ViewBag.Success == true)
             </div>
             @foreach (var task in Model.DialogueTaskGaps)
             {
+                int counter2 = 1;
                 <div class="container box-color">
                     <div class="row border">
                         <div class="col-sm-12 margin-zt">
@@ -153,9 +158,10 @@ else if (ViewBag.Success == true)
                         @foreach (var taskAnswer in task.CorrectAnswers)
                         {
                             <div class="col-sm-6 border border-secondary textp">
-                                <h6>@taskAnswer.CorrectAnswer</h6>
-                                <h6>@taskAnswer.CorrectAnswerPl</h6>
+                                <h6>@counter2:</h6>
+                                <h6>@taskAnswer.CorrectAnswer - @taskAnswer.CorrectAnswerPl</h6>
                             </div>
+                            counter2++;
                         }
                         <div class="col-sm-12 border textp">
                             <h5><b>Wytłumaczenie:</b></h5>

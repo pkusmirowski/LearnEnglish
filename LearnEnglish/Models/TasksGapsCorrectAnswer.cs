@@ -1,4 +1,7 @@
-﻿namespace LearnEnglish.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace LearnEnglish.Models
 {
     public partial class TasksGapsCorrectAnswer
     {

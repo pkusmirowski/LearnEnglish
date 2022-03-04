@@ -249,8 +249,6 @@ namespace LearnEnglish.Services
 
             var answers = _context.DialogueTasksGapsCorrectAnswers.Where(x => x.IdDialogueTasksGaps == task.Id).ToList();
 
-            var answerNumber = _context.DialogueTasksGapsAnswerPacks.Where(x => x.IdDialogueTasksGaps == task.Id).ToList();
-
             var taskGaps = _context.DialogueTasksGaps.Select(x => new DialogueTasksGapsItemViewModel
             {
                 Id = x.Id,
@@ -258,7 +256,6 @@ namespace LearnEnglish.Services
                 TextToFill = x.TextToFill,
                 Explanation = x.Explanation,
                 CorrectAnswers = answers,
-                AnswerNumber = answerNumber.Count,
             }).Where(x => x.Id == task.Id);
 
             return new DialogueTasksGapsViewModel
@@ -273,42 +270,38 @@ namespace LearnEnglish.Services
             {
                 return 0;
             }
-
+            //Zmienić na dokładne
             var currentTask = viewModel.DialogueTaskGaps.FirstOrDefault();
-
             var answers = _context.DialogueTasksGapsCorrectAnswers.Where(x => x.IdDialogueTasksGaps == currentTask.Id).ToList();
 
-            var answerNumber = _context.DialogueTasksGapsAnswerPacks.Where(x => x.IdDialogueTasksGaps == currentTask.Id).ToList();
-
             int counter = 0;
+            int counter2 = 1;
 
-            bool[] correctAnswers = new bool[answerNumber.Count];
-
-            Array.Resize(ref answer, answers.Count);
+            var boolList = new List<bool>();
 
             foreach (var an in answers)
             {
-                for (int i = 0; i < answers.Count; i++)
+                if(an.CorrectAnswer == answer[counter] && an.GapNumber == counter2)
                 {
-                    if (!String.IsNullOrEmpty(answer[counter]))
-                    {
-                        if (answers[i].CorrectAnswer == answer[counter])
-                        {
-                            correctAnswers[counter] = true;
-                        }
-                    }
+                    boolList.Add(true);
+                }
+                else
+                {
+                    boolList.Add(false);
                 }
                 counter++;
+                counter2++;
             }
 
-            if (correctAnswers.Count(c => c) == answerNumber.Count)
+            if(boolList.All(c=> c))
             {
                 return 1;
             }
-            else
+            else if(boolList.Any(c=> !c))
             {
                 return 2;
             }
+            return 0;
         }
     }
 }

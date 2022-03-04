@@ -9,6 +9,5 @@ namespace LearnEnglish.ViewModels
         public string TextToFill { get; set; }
         public string Explanation { get; set; }
         public List<TasksGapsPossibleAnswer> PossibleAnswer { get; set; }
-
     }
 }
