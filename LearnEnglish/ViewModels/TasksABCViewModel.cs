@@ -2,7 +2,6 @@
 {
     public class TasksABCViewModel
     {
-        public IEnumerable<TasksABCItemViewModel> TaskABC { get; set; }
-
+        public IEnumerable<TasksABCItemViewModel> TaskABC { get; set; } = null!;
     }
 }

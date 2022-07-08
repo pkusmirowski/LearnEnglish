@@ -1,11 +1,13 @@
 using LearnEnglish.Models;
 using LearnEnglish.Services;
 using Microsoft.EntityFrameworkCore;
+using LearnEnglish.Functions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Add services to the container.
-builder.Services.AddDbContext<EnglishDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+string connectionString = Vault.GetSecretPhrase("ConnectionStrings");
+builder.Services.AddDbContext<EnglishDBContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddRazorPages();
 builder.Services.AddTransient<TaskService>();
 var app = builder.Build();
