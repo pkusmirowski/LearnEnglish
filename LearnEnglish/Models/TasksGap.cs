@@ -9,9 +9,9 @@
         }
 
         public int Id { get; set; }
-        public string TaskName { get; set; } = null!;
-        public string Explanation { get; set; } = null!;
-        public string TextToFill { get; set; } = null!;
+        public string? TaskName { get; set; }
+        public string? Explanation { get; set; }
+        public string? TextToFill { get; set; }
 
         public virtual ICollection<TasksGapsCorrectAnswer> TasksGapsCorrectAnswers { get; set; }
         public virtual ICollection<TasksGapsPossibleAnswer> TasksGapsPossibleAnswers { get; set; }

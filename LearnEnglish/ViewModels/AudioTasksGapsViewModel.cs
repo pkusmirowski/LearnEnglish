@@ -2,7 +2,7 @@
 {
     public class AudioTasksGapsViewModel
     {
-        public IEnumerable<AudioTasksGapsItemViewModel> AudioTaskGaps { get; set; } = null!;
+        public IEnumerable<AudioTasksGapsItemViewModel> AudioTaskGaps { get; set; }
 
     }
 }

@@ -8,9 +8,9 @@
         }
 
         public int Id { get; set; }
-        public string TaskName { get; set; } = null!;
-        public string Explanation { get; set; } = null!;
-        public string SoundtrackName { get; set; } = null!;
+        public string? TaskName { get; set; }
+        public string? Explanation { get; set; }
+        public string? SoundtrackName { get; set; }
 
         public virtual ICollection<AudioTasksGapsCorrectAnswer> AudioTasksGapsCorrectAnswers { get; set; }
     }

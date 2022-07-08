@@ -59,10 +59,3 @@ C:\Users\Paweł\source\repos\LearnEnglish\LearnEnglish\obj\Debug\net6.0\LearnEng
 C:\Users\Paweł\source\repos\LearnEnglish\LearnEnglish\obj\Debug\net6.0\LearnEnglish.genruntimeconfig.cache
 C:\Users\Paweł\source\repos\LearnEnglish\LearnEnglish\obj\Debug\net6.0\ref\LearnEnglish.dll
 C:\Users\Paweł\source\repos\LearnEnglish\LearnEnglish\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
-C:\Users\Paweł\source\repos\LearnEnglish\LearnEnglish\bin\Debug\net6.0\Azure.Core.dll
-C:\Users\Paweł\source\repos\LearnEnglish\LearnEnglish\bin\Debug\net6.0\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
-C:\Users\Paweł\source\repos\LearnEnglish\LearnEnglish\bin\Debug\net6.0\Azure.Identity.dll
-C:\Users\Paweł\source\repos\LearnEnglish\LearnEnglish\bin\Debug\net6.0\Azure.Security.KeyVault.Secrets.dll
-C:\Users\Paweł\source\repos\LearnEnglish\LearnEnglish\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Users\Paweł\source\repos\LearnEnglish\LearnEnglish\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
-C:\Users\Paweł\source\repos\LearnEnglish\LearnEnglish\bin\Debug\net6.0\System.Memory.Data.dll
