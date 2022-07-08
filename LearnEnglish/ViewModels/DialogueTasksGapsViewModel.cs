@@ -2,6 +2,6 @@
 {
     public class DialogueTasksGapsViewModel
     {
-        public IEnumerable<DialogueTasksGapsItemViewModel> DialogueTaskGaps { get; set; }
+        public IEnumerable<DialogueTasksGapsItemViewModel> DialogueTaskGaps { get; set; } = null!;
     }
 }

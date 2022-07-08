@@ -14,6 +14,10 @@ namespace LearnEnglish.Services
         public TasksABCViewModel GetTaskABC()
         {
             var result = _context.TasksAbcs.OrderBy(_ => Guid.NewGuid()).FirstOrDefault();
+            if(result == null)
+            {
+                return new TasksABCViewModel();
+            }
 
             var taskABC = _context.TasksAbcanswers.Select(x => new TasksABCItemViewModel
             {
@@ -38,6 +42,12 @@ namespace LearnEnglish.Services
         public string TaskABCGetCorrectAnswer(TasksABCViewModel viewModel)
         {
             var currentTask = viewModel.TaskABC.FirstOrDefault();
+
+            if (currentTask == null)
+            {
+                return "No task";
+            }
+
             return currentTask.CorrectAnswer;
         }
 
@@ -49,6 +59,12 @@ namespace LearnEnglish.Services
             }
 
             var currentTask = viewModel.TaskABC.FirstOrDefault();
+
+            if (currentTask == null)
+            {
+                return 0;
+            }
+
             if (currentTask.CorrectAnswer == answer)
             {
                 return 1;
@@ -62,6 +78,10 @@ namespace LearnEnglish.Services
         public TasksGapsViewModel GetTaskGaps()
         {
             var task = _context.TasksGaps.OrderBy(_ => Guid.NewGuid()).FirstOrDefault();
+            if(task == null)
+            {
+                return new TasksGapsViewModel();
+            }
 
             var answers = _context.TasksGapsPossibleAnswers.Where(x => x.IdTasksGaps == task.Id).ToList();
 
@@ -102,6 +122,11 @@ namespace LearnEnglish.Services
 
             var currentTask = viewModel.TaskGaps.FirstOrDefault();
 
+            if (currentTask == null)
+            {
+                return 0;
+            }
+
             var answers = _context.TasksGapsCorrectAnswers.Where(x => x.IdTasksGaps == currentTask.Id).ToList();
 
             int counter = 0;
@@ -110,7 +135,10 @@ namespace LearnEnglish.Services
 
             foreach (var an in answers)
             {
-                correctAnswers[counter] = an.IdTasksPossibleAnswerNavigation.PossibleAnswer == correctAnswersText[counter];
+                if (an.IdTasksPossibleAnswerNavigation != null)
+                {
+                    correctAnswers[counter] = an.IdTasksPossibleAnswerNavigation.PossibleAnswer == correctAnswersText[counter];
+                }
                 counter++;
             }
             var numCorrectAnswers = _context.TasksGapsCorrectAnswers.Where(x => x.IdTasksGaps == currentTask.Id).Count();
@@ -141,6 +169,10 @@ namespace LearnEnglish.Services
             }
 
             var currentTask = viewModel.TaskGaps.FirstOrDefault();
+            if (currentTask == null)
+            {
+                return new List<TasksGapsCorrectAnswer>();
+            }
 
             return _context.TasksGapsCorrectAnswers.Where(x => x.IdTasksGaps == currentTask.Id).ToList();
         }
@@ -148,6 +180,10 @@ namespace LearnEnglish.Services
         public TasksGapsABCViewModel GetTaskGapsABC()
         {
             var task = _context.TasksGapsZabcs.OrderBy(_ => Guid.NewGuid()).FirstOrDefault();
+            if (task == null)
+            {
+                return new TasksGapsABCViewModel();
+            }
 
             var answers = _context.TasksGapsZabcpossibleAnswers.Where(x => x.IdTasksGapsAbc == task.Id).ToList();
 
@@ -174,6 +210,10 @@ namespace LearnEnglish.Services
             }
 
             var currentTask = viewModel.TaskGapsABC.FirstOrDefault();
+            if (currentTask == null)
+            {
+                return 0;
+            }
 
             var answers = _context.TasksGapsZabccorrectAnswers.Where(x => x.IdTasksGapsAbc == currentTask.Id).ToList();
 
@@ -183,7 +223,10 @@ namespace LearnEnglish.Services
 
             foreach (var an in answers)
             {
-                correctAnswers[counter] = an.IdTasksGapsAbcpossibleAnswerNavigation.PossibleAnswer == answer[counter];
+                if (an.IdTasksGapsAbcpossibleAnswerNavigation != null)
+                {
+                    correctAnswers[counter] = an.IdTasksGapsAbcpossibleAnswerNavigation.PossibleAnswer == answer[counter];
+                }
                 counter++;
             }
             var numCorrectAnswers = _context.TasksGapsZabccorrectAnswers.Where(x => x.IdTasksGapsAbc == currentTask.Id).Count();
@@ -201,6 +244,11 @@ namespace LearnEnglish.Services
         public AudioTasksGapsViewModel GetAudioTaskGapsABC()
         {
             var task = _context.AudioTasksGaps.OrderBy(_ => Guid.NewGuid()).FirstOrDefault();
+
+            if (task == null)
+            {
+                return new AudioTasksGapsViewModel();
+            }
 
             var taskGaps = _context.AudioTasksGapsCorrectAnswers.Select(x => new AudioTasksGapsItemViewModel
             {
@@ -232,6 +280,10 @@ namespace LearnEnglish.Services
             }
 
             var currentTask = viewModel.AudioTaskGaps.FirstOrDefault();
+            if (currentTask == null)
+            {
+                return 0;
+            }
 
             if (currentTask.Answer1 == answer[0] && currentTask.Answer2 == answer[1] && currentTask.Answer3 == answer[2] && currentTask.Answer4 == answer[3])
             {
@@ -246,6 +298,10 @@ namespace LearnEnglish.Services
         public DialogueTasksGapsViewModel GetDialogueTasksGaps()
         {
             var task = _context.DialogueTasksGaps.OrderBy(_ => Guid.NewGuid()).FirstOrDefault();
+            if (task == null)
+            {
+                return new DialogueTasksGapsViewModel();
+            }
 
             var answers = _context.DialogueTasksGapsCorrectAnswers.Where(x => x.IdDialogueTasksGaps == task.Id).ToList();
 
@@ -272,6 +328,12 @@ namespace LearnEnglish.Services
             }
             //Zmienić na dokładne
             var currentTask = viewModel.DialogueTaskGaps.FirstOrDefault();
+
+            if (currentTask == null)
+            {
+                return 0;
+            }
+
             var answers = _context.DialogueTasksGapsCorrectAnswers.Where(x => x.IdDialogueTasksGaps == currentTask.Id).ToList();
 
             int counter = 0;
