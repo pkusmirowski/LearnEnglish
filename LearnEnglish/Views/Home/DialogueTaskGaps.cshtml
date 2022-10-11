@@ -1,6 +1,7 @@
 ﻿@model LearnEnglish.ViewModels.DialogueTasksGapsViewModel
-
-@{ ViewData["Title"] = "Dialog do uzupełnienia"; }
+@{
+    ViewData["Title"] = "Dialog do uzupełnienia"; 
+}
 @if (ViewBag.Standard == true)
 {
     <center>
@@ -18,9 +19,9 @@
                         </div>
                         <div class="col-sm-12 margin-zt">
                             <h5>Wpisz odpowiedzi:</h5>
-                        </div>                       
+                        </div>
                         @foreach (var x in @task.CorrectAnswers)
-                        {                    
+                        {
                             <div class="col-sm-6">
                                 Luka @counter
                             </div>
@@ -28,6 +29,7 @@
                                 <input type="text" id="answer" name="answer" />
                                 <br />
                             </div>
+
                             counter++;
                         }
                     </div>
@@ -66,30 +68,34 @@ else if (ViewBag.False == false)
                             int flag = 0;
                             foreach (var taskAnswer in task.CorrectAnswers)
                             {
+                                if (taskAnswer.CorrectAnswer == ViewBag.AnswerB[flag])
+                                {
 
-                                    if (taskAnswer.CorrectAnswer == ViewBag.AnswerB[flag])
-                                    {
-                                         counter++;  
-                                        <div class="col-sm-6 border border-secondary text-success textp">                                               
-                                            <h5><b>@counter: @taskAnswer.CorrectAnswer</b></h5>                                        
-                                        </div>
-                                        
-                                    }  
-                                    else
-                                    {
-                                        counter++;
-                                        <div class="col-sm-6 border border-secondary text-danger textp">                                               
-                                            <h5><b>@counter: @ViewBag.AnswerB[flag]</b></h5>                                        
-                                        </div>
-                                        
-                                    }
-                                    flag++;
-                                    if(ViewBag.Count == counter)
-                                    {
-                                        break;
-                                    }
-                            }                                 
-                        }                             
+                                    counter++;
+                                    <div class="col-sm-6 border border-secondary text-success textp">
+                                        <h5><b>@counter: @taskAnswer.CorrectAnswer</b></h5>
+                                    </div>
+                                }
+                                else
+                                {
+
+                                    counter++;
+                                    <div class="col-sm-6 border border-secondary text-danger textp">
+                                        <h5><b>@counter: @ViewBag.AnswerB[flag]</b></h5>
+                                    </div>
+
+
+
+                                }
+                                flag++;
+                                if (ViewBag.Count == counter)
+                                {
+
+                                    break;
+
+                                }
+                            }
+                        }
                         <div class="col-sm-12 margin-zt">
                             <h5>Poprawne odpowiedzi:</h5>
                         </div>
@@ -99,6 +105,7 @@ else if (ViewBag.False == false)
                                 <h6>@counter2:</h6>
                                 <h6>@taskAnswer.CorrectAnswer - @taskAnswer.CorrectAnswerPl</h6>
                             </div>
+
                             counter2++;
                         }
                         <div class="col-sm-12 border textp">
@@ -106,14 +113,15 @@ else if (ViewBag.False == false)
                             <h6>@task.Explanation</h6>
                         </div>
                     </div>
-                  </div>
+                </div>
             }
             <br />
             <div class="form-group">
                 <input type="submit" value="Kolejne zadanie" class="btn btn-primary" />
             </div>
         </form>
-    </center> }
+    </center>
+}
 else if (ViewBag.Success == true)
 {
     <center>
@@ -139,19 +147,19 @@ else if (ViewBag.Success == true)
                             int counter = 0;
                             foreach (var taskAnswer in task.CorrectAnswers)
                             {
-                                
-                                    for (int x = 0; x < ViewBag.Count; x++)
+                                for (int x = 0; x < ViewBag.Count; x++)
+                                {
+                                    if (taskAnswer.CorrectAnswer == ViewBag.AnswerG[x])
                                     {
-                                        if (taskAnswer.CorrectAnswer == ViewBag.AnswerG[x])
-                                        {
-                                            counter++;
-                                            <div class="col-sm-6 border border-secondary text-success textp">                                               
-                                                <h5><b>@counter: @taskAnswer.CorrectAnswer</b></h5>                                        
-                                            </div>
-                                        }
+
+                                        counter++;
+                                        <div class="col-sm-6 border border-secondary text-success textp">
+                                            <h5><b>@counter: @taskAnswer.CorrectAnswer</b></h5>
+                                        </div>
                                     }
-                            }                              
-                        }                             
+                                }
+                            }
+                        }
                         <div class="col-sm-12 margin-zt">
                             <h5>Poprawne odpowiedzi:</h5>
                         </div>
@@ -168,7 +176,7 @@ else if (ViewBag.Success == true)
                             <h6>@task.Explanation</h6>
                         </div>
                     </div>
-                  </div>
+                </div>
             }
             <br />
             <div class="form-group">
@@ -176,4 +184,5 @@ else if (ViewBag.Success == true)
             </div>
         </form>
     </center>
+
 }

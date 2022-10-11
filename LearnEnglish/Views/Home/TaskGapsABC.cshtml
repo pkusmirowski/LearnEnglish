@@ -10,44 +10,44 @@
 
 @if (ViewBag.Standard == true)
 {
-<center>
-    <form asp-action="TaskGapsABC" method="post">
-        @foreach (var task in Model.TaskGapsABC)
-        {
-            <div class="container box-color">
-                <div class="row border">
-                    <div class="col-sm-12 border">
-                        <h4>@task.TaskName</h4>
-                    </div>
-                    <div class="col-sm-12 border">
-                        <h5>@task.TextToFill</h5>
-                    </div>
-                    <div class="col-sm-12 border">
-                        <h5>Zaznacz poprawną odpowieź</h5>
-                    </div>
-
-                    @foreach (var taskAnswer in task.PossibleAnswer)
-                    {
-                        <div class="col-sm-4">
-                            <p>Luka @i</p>
-                            <h6><input type="checkbox" class="radio" name="answer[@i][]" value="@taskAnswer.PossibleAnswer" /> @taskAnswer.PossibleAnswer</h6>
-                            <br />
+    <center>
+        <form asp-action="TaskGapsABC" method="post">
+            @foreach (var task in Model.TaskGapsABC)
+            {
+                <div class="container box-color">
+                    <div class="row border">
+                        <div class="col-sm-12 border">
+                            <h4>@task.TaskName</h4>
                         </div>
-                        flag++;
-                        if ((flag % 3) == 0)
+                        <div class="col-sm-12 border">
+                            <h5>@task.TextToFill</h5>
+                        </div>
+                        <div class="col-sm-12 border">
+                            <h5>Zaznacz poprawną odpowieź</h5>
+                        </div>
+                        @foreach (var taskAnswer in task.PossibleAnswer)
                         {
-                            i++;
+                            <div class="col-sm-4">
+                                <p>Luka @i</p>
+                                <h6><input type="checkbox" class="radio" name="answer[@i][]" value="@taskAnswer.PossibleAnswer" />
+                                    @taskAnswer.PossibleAnswer</h6>
+                                <br />
+                            </div>
+                            flag++;
+                            if ((flag % 3) == 0)
+                            {
+                                i++;
+                            }
                         }
-                    }
+                    </div>
                 </div>
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Sprawdź odpowiedź" class="btn btn-primary" />
             </div>
-        }
-        <br />
-        <div class="form-group">
-            <input type="submit" value="Sprawdź odpowiedź" class="btn btn-primary" />
-        </div>
-    </form>
-</center>
+        </form>
+    </center>
 }
 else if (ViewBag.False == false)
 {
@@ -73,7 +73,8 @@ else if (ViewBag.False == false)
                         {
                             <div class="col-sm-4">
                                 <p>Luka @i</p>
-                                <h6><input type="checkbox" class="radio" name="answer[@i][]" value="@taskAnswer.PossibleAnswer" /> @taskAnswer.PossibleAnswer</h6>
+                                <h6><input type="checkbox" class="radio" name="answer[@i][]" value="@taskAnswer.PossibleAnswer" />
+                                    @taskAnswer.PossibleAnswer</h6>
                                 <br />
                             </div>
                             flag++;
@@ -120,7 +121,9 @@ else if (ViewBag.Success == true)
                         <div class="col-sm-12 border">
                             <h5>@task.TextToFill</h5>
                         </div>
-                        @{int j = 0;}
+                        @{
+                            int j = 0;
+                        }
                         @while (j < 4)
                         {
                             @foreach (var taskAnswer in task.PossibleAnswer)
@@ -139,7 +142,6 @@ else if (ViewBag.Success == true)
                                         <br />
                                     </div>
                                 }
-
                             }
                             j++;
                         }

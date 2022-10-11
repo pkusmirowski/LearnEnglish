@@ -14,7 +14,7 @@ namespace LearnEnglish.Services
         public TasksABCViewModel GetTaskABC()
         {
             var result = _context.TasksAbcs.OrderBy(_ => Guid.NewGuid()).FirstOrDefault();
-            if(result == null)
+            if (result == null)
             {
                 return new TasksABCViewModel();
             }
@@ -78,7 +78,7 @@ namespace LearnEnglish.Services
         public TasksGapsViewModel GetTaskGaps()
         {
             var task = _context.TasksGaps.OrderBy(_ => Guid.NewGuid()).FirstOrDefault();
-            if(task == null)
+            if (task == null)
             {
                 return new TasksGapsViewModel();
             }

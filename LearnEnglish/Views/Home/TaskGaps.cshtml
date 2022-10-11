@@ -63,36 +63,15 @@ else if (ViewBag.False == false)
                             <div class="col-sm-12 border textp">
                                 <h5>Twoje odpowiedzi:</h5>
                             </div>
-                            @foreach (var taskAnswer in task.PossibleAnswer)
-                            {
-                                /*
-                                /////
-                                ///Do przemyślenias
-                                /////
-                                //Dodać odpowiednio count tutaj do ilości odpowiedzi
-                                if(flag > 2)
-                                {
-                                    break;
-                                }
-                                var x = @ViewBag.correctAnswers[flag];
-                                if (x.Number == @ViewBag.AnswerG[flag])
-                                {
-                                    flag++;
-                                    <div class="col-sm-4 border textp">
-                                        <h6 class="text-success">@x.Number @taskAnswer.PossibleAnswer</h6>
-                                    </div>    
-                                }
-
-                                flag2++;  
-                                */
-
+                            @{
+                                flag = 0; 
                             }
-                            @{flag = 0; }
                             <div class="col-sm-12 border textp">
                                 <h5>Odpowiedzi po polsku::</h5>
                             </div>
                             @foreach (var taskAnswer in task.PossibleAnswer)
                             {
+
                                 flag++;
                                 <div class="col-sm-4 border textp">
                                     <h6>@flag @taskAnswer.PossibleAnswer</h6>
@@ -115,6 +94,7 @@ else if (ViewBag.False == false)
     </center>
 }
 else if (ViewBag.Success == true)
+
 {
     <center>
         <form asp-action="RandomTask" method="post">
@@ -123,9 +103,8 @@ else if (ViewBag.Success == true)
             </div>
             @{
                 int flag = 0;
-                //int flag2 = 0;
-                //int flag3 = 0;
                 foreach (var task in Model.TaskGaps)
+
                 {
                     <div class="container box-color">
                         <div class="row align-items-start border">
@@ -138,41 +117,21 @@ else if (ViewBag.Success == true)
                             <div class="col-sm-12 border textp">
                                 <h5>Twoje odpowiedzi:</h5>
                             </div>
-                            @foreach (var taskAnswer in task.PossibleAnswer)
-                            {
-                                /*
-                                /////
-                                ///Do przemyślenias
-                                /////
-                                //Dodać odpowiednio count tutaj do ilości odpowiedzi
-                                if(flag > 2)
-                                {
-                                    break;
-                                }
-                                var x = @ViewBag.correctAnswers[flag];
-                                if (x.Number == @ViewBag.AnswerG[flag])
-                                {
-                                    flag++;
-                                    <div class="col-sm-4 border textp">
-                                        <h6 class="text-success">@x.Number @taskAnswer.PossibleAnswer</h6>
-                                    </div>    
-                                }
-
-                                flag2++;  
-                                */
-
+                            @{
+                                flag = 0;
                             }
-                            @{flag = 0;}
                             <div class="col-sm-12 border textp">
                                 <h5>Odpowiedzi po polsku::</h5>
                             </div>
                             @foreach (var taskAnswer in task.PossibleAnswer)
                             {
+
                                 flag++;
                                 <div class="col-sm-4 border textp">
                                     <h6>@flag @taskAnswer.PossibleAnswer</h6>
                                     <h6>@taskAnswer.PossibleAnswerPl</h6>
                                 </div>
+
                             }
                             <div class="col-sm-12 border textp">
                                 <h5><b>Wytłumaczenie</b></h5>
