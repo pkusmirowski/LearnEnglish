@@ -1,5 +1,6 @@
 ﻿using LearnEnglish.Models;
 using LearnEnglish.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace LearnEnglish.Services
 {
@@ -19,19 +20,22 @@ namespace LearnEnglish.Services
                 return new TasksABCViewModel();
             }
 
-            var taskABC = _context.TasksAbcanswers.Select(x => new TasksABCItemViewModel
-            {
-                Id = x.IdTasksAbc,
-                Option1 = x.Option1,
-                Option2 = x.Option2,
-                Option3 = x.Option3,
-                Option1Pl = x.Option1Pl,
-                Option2Pl = x.Option2Pl,
-                Option3Pl = x.Option3Pl,
-                Question = x.Question,
-                CorrectAnswer = x.CorrectAnswer,
-                Explanation = x.Explanation,
-            }).Where(x => x.Id == result.Id);
+            var taskABC = _context.TasksAbcanswers
+                .Where(x => x.IdTasksAbc == result.Id)
+                .Select(x => new TasksABCItemViewModel
+                {
+                    Id = x.IdTasksAbc,
+                    Option1 = x.Option1,
+                    Option2 = x.Option2,
+                    Option3 = x.Option3,
+                    Option1Pl = x.Option1Pl,
+                    Option2Pl = x.Option2Pl,
+                    Option3Pl = x.Option3Pl,
+                    Question = x.Question,
+                    CorrectAnswer = x.CorrectAnswer,
+                    Explanation = x.Explanation,
+                })
+                .ToList();
 
             return new TasksABCViewModel
             {
@@ -83,16 +87,21 @@ namespace LearnEnglish.Services
                 return new TasksGapsViewModel();
             }
 
-            var answers = _context.TasksGapsPossibleAnswers.Where(x => x.IdTasksGaps == task.Id).ToList();
+            var answers = _context.TasksGapsPossibleAnswers
+                .Where(x => x.IdTasksGaps == task.Id)
+                .ToList();
 
-            var taskGaps = _context.TasksGaps.Select(x => new TasksGapsItemViewModel
-            {
-                Id = x.Id,
-                TaskName = x.TaskName,
-                TextToFill = x.TextToFill,
-                Explanation = x.Explanation,
-                PossibleAnswer = answers,
-            }).Where(x => x.Id == task.Id);
+            var taskGaps = _context.TasksGaps
+                .Where(x => x.Id == task.Id)
+                .Select(x => new TasksGapsItemViewModel
+                {
+                    Id = x.Id,
+                    TaskName = x.TaskName,
+                    TextToFill = x.TextToFill,
+                    Explanation = x.Explanation,
+                    PossibleAnswer = answers,
+                })
+                .ToList();
 
             return new TasksGapsViewModel
             {
@@ -108,12 +117,11 @@ namespace LearnEnglish.Services
             }
 
             string[] correctAnswersText = new string[answer.Length];
-
             int answersCounter = 0;
 
             for (int i = 0; i < answer.Length; i++)
             {
-                if (!String.IsNullOrEmpty(answer[i]))
+                if (!string.IsNullOrEmpty(answer[i]))
                 {
                     correctAnswersText[answersCounter] = answerText[i];
                     answersCounter++;
@@ -121,27 +129,26 @@ namespace LearnEnglish.Services
             }
 
             var currentTask = viewModel.TaskGaps.FirstOrDefault();
-
             if (currentTask == null)
             {
                 return 0;
             }
 
-            var answers = _context.TasksGapsCorrectAnswers.Where(x => x.IdTasksGaps == currentTask.Id).ToList();
+            var answers = _context.TasksGapsCorrectAnswers
+                .Include(x => x.IdTasksPossibleAnswerNavigation)
+                .Where(x => x.IdTasksGaps == currentTask.Id)
+                .ToList();
 
+            bool[] correctAnswers = new bool[answers.Count];
             int counter = 0;
-
-            bool[] correctAnswers = new bool[answer.Length];
 
             foreach (var an in answers)
             {
-                if (an.IdTasksPossibleAnswerNavigation != null)
-                {
-                    correctAnswers[counter] = an.IdTasksPossibleAnswerNavigation.PossibleAnswer == correctAnswersText[counter];
-                }
+                correctAnswers[counter] = an.IdTasksPossibleAnswerNavigation?.PossibleAnswer == correctAnswersText[counter];
                 counter++;
             }
-            var numCorrectAnswers = _context.TasksGapsCorrectAnswers.Where(x => x.IdTasksGaps == currentTask.Id).Count();
+
+            var numCorrectAnswers = answers.Count;
 
             if (correctAnswers.Count(c => c) == numCorrectAnswers)
             {
@@ -155,13 +162,17 @@ namespace LearnEnglish.Services
 
         public List<TasksGapsCorrectAnswer> GetCorrectAnswersTaskGaps(TasksGapsViewModel viewModel, string[] answer, string[] answerText)
         {
-            string[] correctAnswersText = new string[answer.Length];
+            if (answer == null || answer.Length == 0 || answerText == null || answerText.Length == 0)
+            {
+                return new List<TasksGapsCorrectAnswer>();
+            }
 
+            string[] correctAnswersText = new string[answer.Length];
             int answersCounter = 0;
 
             for (int i = 0; i < answer.Length; i++)
             {
-                if (!String.IsNullOrEmpty(answer[i]))
+                if (!string.IsNullOrEmpty(answer[i]))
                 {
                     correctAnswersText[answersCounter] = answerText[i];
                     answersCounter++;
@@ -174,7 +185,12 @@ namespace LearnEnglish.Services
                 return new List<TasksGapsCorrectAnswer>();
             }
 
-            return _context.TasksGapsCorrectAnswers.Where(x => x.IdTasksGaps == currentTask.Id).ToList();
+            var correctAnswers = _context.TasksGapsCorrectAnswers
+                .Include(x => x.IdTasksPossibleAnswerNavigation)
+                .Where(x => x.IdTasksGaps == currentTask.Id)
+                .ToList();
+
+            return correctAnswers;
         }
 
         public TasksGapsABCViewModel GetTaskGapsABC()
@@ -185,20 +201,22 @@ namespace LearnEnglish.Services
                 return new TasksGapsABCViewModel();
             }
 
-            var answers = _context.TasksGapsZabcpossibleAnswers.Where(x => x.IdTasksGapsAbc == task.Id).ToList();
-
-            var taskGaps = _context.TasksGapsZabcs.Select(x => new TasksGapsABCItemViewModel
-            {
-                Id = x.Id,
-                TaskName = x.TaskName,
-                TextToFill = x.TextToFill,
-                Explanation = x.Explanation,
-                PossibleAnswer = answers,
-            }).Where(x => x.Id == task.Id);
+            var taskGaps = _context.TasksGapsZabcs
+                .Include(x => x.TasksGapsZabcpossibleAnswers)
+                .Where(x => x.Id == task.Id)
+                .Select(x => new TasksGapsABCItemViewModel
+                {
+                    Id = x.Id,
+                    TaskName = x.TaskName,
+                    TextToFill = x.TextToFill,
+                    Explanation = x.Explanation,
+                    PossibleAnswer = x.TasksGapsZabcpossibleAnswers.ToList(),
+                })
+                .FirstOrDefault();
 
             return new TasksGapsABCViewModel
             {
-                TaskGapsABC = taskGaps
+                TaskGapsABC = taskGaps != null ? new List<TasksGapsABCItemViewModel> { taskGaps } : new List<TasksGapsABCItemViewModel>()
             };
         }
 
@@ -215,23 +233,28 @@ namespace LearnEnglish.Services
                 return 0;
             }
 
-            var answers = _context.TasksGapsZabccorrectAnswers.Where(x => x.IdTasksGapsAbc == currentTask.Id).ToList();
+            var correctAnswers = _context.TasksGapsZabccorrectAnswers
+                .Where(x => x.IdTasksGapsAbc == currentTask.Id)
+                .Select(x => x.IdTasksGapsAbcpossibleAnswerNavigation.PossibleAnswer)
+                .ToList();
 
-            int counter = 0;
+            bool[] isAnswerCorrect = new bool[answer.Length];
 
-            bool[] correctAnswers = new bool[answer.Length];
-
-            foreach (var an in answers)
+            for (int i = 0; i < answer.Length; i++)
             {
-                if (an.IdTasksGapsAbcpossibleAnswerNavigation != null)
+                if (i < correctAnswers.Count)
                 {
-                    correctAnswers[counter] = an.IdTasksGapsAbcpossibleAnswerNavigation.PossibleAnswer == answer[counter];
+                    isAnswerCorrect[i] = correctAnswers[i] == answer[i];
                 }
-                counter++;
+                else
+                {
+                    break;
+                }
             }
-            var numCorrectAnswers = _context.TasksGapsZabccorrectAnswers.Where(x => x.IdTasksGapsAbc == currentTask.Id).Count();
 
-            if (correctAnswers.Count(c => c) == numCorrectAnswers)
+            var numCorrectAnswers = correctAnswers.Count;
+
+            if (isAnswerCorrect.Count(c => c) == numCorrectAnswers)
             {
                 return 1;
             }
@@ -250,21 +273,24 @@ namespace LearnEnglish.Services
                 return new AudioTasksGapsViewModel();
             }
 
-            var taskGaps = _context.AudioTasksGapsCorrectAnswers.Select(x => new AudioTasksGapsItemViewModel
-            {
-                Id = x.IdAudioTask,
-                TaskName = task.TaskName,
-                Answer1 = x.Answer1,
-                Answer2 = x.Answer2,
-                Answer3 = x.Answer3,
-                Answer4 = x.Answer4,
-                Answer1Pl = x.Answer1Pl,
-                Answer2Pl = x.Answer2Pl,
-                Answer3Pl = x.Answer3Pl,
-                Answer4Pl = x.Answer4Pl,
-                SoundtrackName = task.SoundtrackName,
-                Explanation = task.Explanation
-            }).Where(x => x.Id == task.Id);
+            var taskGaps = _context.AudioTasksGapsCorrectAnswers
+                .Where(x => x.IdAudioTask == task.Id)
+                .Select(x => new AudioTasksGapsItemViewModel
+                {
+                    Id = x.IdAudioTask,
+                    TaskName = task.TaskName,
+                    Answer1 = x.Answer1,
+                    Answer2 = x.Answer2,
+                    Answer3 = x.Answer3,
+                    Answer4 = x.Answer4,
+                    Answer1Pl = x.Answer1Pl,
+                    Answer2Pl = x.Answer2Pl,
+                    Answer3Pl = x.Answer3Pl,
+                    Answer4Pl = x.Answer4Pl,
+                    SoundtrackName = task.SoundtrackName,
+                    Explanation = task.Explanation
+                })
+                .ToList();
 
             return new AudioTasksGapsViewModel
             {
@@ -285,14 +311,12 @@ namespace LearnEnglish.Services
                 return 0;
             }
 
-            if (currentTask.Answer1 == answer[0] && currentTask.Answer2 == answer[1] && currentTask.Answer3 == answer[2] && currentTask.Answer4 == answer[3])
-            {
-                return 1;
-            }
-            else
-            {
-                return 2;
-            }
+            bool isCorrect = currentTask.Answer1 == answer[0] &&
+                             currentTask.Answer2 == answer[1] &&
+                             currentTask.Answer3 == answer[2] &&
+                             currentTask.Answer4 == answer[3];
+
+            return isCorrect ? 1 : 2;
         }
 
         public DialogueTasksGapsViewModel GetDialogueTasksGaps()
@@ -303,16 +327,19 @@ namespace LearnEnglish.Services
                 return new DialogueTasksGapsViewModel();
             }
 
-            var answers = _context.DialogueTasksGapsCorrectAnswers.Where(x => x.IdDialogueTasksGaps == task.Id).ToList();
-
-            var taskGaps = _context.DialogueTasksGaps.Select(x => new DialogueTasksGapsItemViewModel
-            {
-                Id = x.Id,
-                TaskName = x.TaskName,
-                TextToFill = x.TextToFill,
-                Explanation = x.Explanation,
-                CorrectAnswers = answers,
-            }).Where(x => x.Id == task.Id);
+            var taskGaps = _context.DialogueTasksGaps
+                .Where(x => x.Id == task.Id)
+                .Select(x => new DialogueTasksGapsItemViewModel
+                {
+                    Id = x.Id,
+                    TaskName = x.TaskName,
+                    TextToFill = x.TextToFill,
+                    Explanation = x.Explanation,
+                    CorrectAnswers = _context.DialogueTasksGapsCorrectAnswers
+                        .Where(a => a.IdDialogueTasksGaps == x.Id)
+                        .ToList()
+                })
+                .ToList();
 
             return new DialogueTasksGapsViewModel
             {
@@ -326,7 +353,7 @@ namespace LearnEnglish.Services
             {
                 return 0;
             }
-            //Zmienić na dokładne
+
             var currentTask = viewModel.DialogueTaskGaps.FirstOrDefault();
 
             if (currentTask == null)
@@ -334,16 +361,16 @@ namespace LearnEnglish.Services
                 return 0;
             }
 
-            var answers = _context.DialogueTasksGapsCorrectAnswers.Where(x => x.IdDialogueTasksGaps == currentTask.Id).ToList();
-
-            int counter = 0;
-            int counter2 = 1;
+            var answers = _context.DialogueTasksGapsCorrectAnswers
+                .Where(x => x.IdDialogueTasksGaps == currentTask.Id)
+                .ToList();
 
             var boolList = new List<bool>();
 
-            foreach (var an in answers)
+            for (int i = 0; i < answers.Count; i++)
             {
-                if (an.CorrectAnswer == answer[counter] && an.GapNumber == counter2)
+                var an = answers[i];
+                if (an.CorrectAnswer == answer[i] && an.GapNumber == i + 1)
                 {
                     boolList.Add(true);
                 }
@@ -351,8 +378,6 @@ namespace LearnEnglish.Services
                 {
                     boolList.Add(false);
                 }
-                counter++;
-                counter2++;
             }
 
             if (boolList.All(c => c))
@@ -363,6 +388,7 @@ namespace LearnEnglish.Services
             {
                 return 2;
             }
+
             return 0;
         }
     }

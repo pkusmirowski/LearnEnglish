@@ -1,8 +1,6 @@
 using LearnEnglish.Models;
 using LearnEnglish.Services;
 using Microsoft.EntityFrameworkCore;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
 
 var builder = WebApplication.CreateBuilder(args);
 

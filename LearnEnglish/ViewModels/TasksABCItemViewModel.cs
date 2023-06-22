@@ -9,7 +9,7 @@
 
         public string Option2 { get; set; } = null!;
 
-        public string Option3 { get; set; }  = null!;
+        public string Option3 { get; set; } = null!;
         public string Option1Pl { get; set; } = null!;
 
         public string Option2Pl { get; set; } = null!;
