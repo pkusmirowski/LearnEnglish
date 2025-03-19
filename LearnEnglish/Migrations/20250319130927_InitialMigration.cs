@@ -4,8 +4,10 @@
 
 namespace LearnEnglish.Migrations
 {
-    public partial class InitialCreate : Migration
+    /// <inheritdoc />
+    public partial class InitialMigration : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -14,9 +16,9 @@ namespace LearnEnglish.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    taskName = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    explanation = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    soundtrackName = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true)
+                    taskName = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    explanation = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    soundtrackName = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,9 +31,9 @@ namespace LearnEnglish.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    taskName = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    explanation = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    textToFill = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true)
+                    taskName = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    explanation = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    textToFill = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,9 +59,9 @@ namespace LearnEnglish.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    taskName = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    explanation = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    textToFill = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true)
+                    taskName = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    explanation = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    textToFill = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,9 +74,9 @@ namespace LearnEnglish.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    taskName = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    explanation = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    textToFill = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true)
+                    taskName = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    explanation = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    textToFill = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,15 +102,15 @@ namespace LearnEnglish.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    answer1 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    answer2 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    answer3 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    answer4 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    answer1PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    answer2PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    answer3PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    answer4PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    idAudioTask = table.Column<int>(type: "int", nullable: true)
+                    answer1 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    answer2 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    answer3 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    answer4 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    answer1PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    answer2PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    answer3PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    answer4PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    idAudioTask = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -117,7 +119,8 @@ namespace LearnEnglish.Migrations
                         name: "FK_AudioTaskCorrectAnswer_AudioTask",
                         column: x => x.idAudioTask,
                         principalTable: "AudioTasksGaps",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -126,16 +129,16 @@ namespace LearnEnglish.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    idDialogueTasksGapsAnswerPack = table.Column<int>(type: "int", nullable: true),
                     correctAnswer = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
                     idDialogueTasksGaps = table.Column<int>(type: "int", nullable: true),
-                    correctAnswerPl = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true)
+                    correctAnswerPl = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
+                    GapNumber = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DialogueTasksGapsCorrectAnswer", x => x.id);
                     table.ForeignKey(
-                        name: "FK_DialogueTasksGapsCorrectAnswer_DialogueTasksGaps",
+                        name: "FK_DialogueTasksGapsCorrectAnswer_DialogueTasksGaps1",
                         column: x => x.idDialogueTasksGaps,
                         principalTable: "DialogueTasksGaps",
                         principalColumn: "id");
@@ -147,16 +150,16 @@ namespace LearnEnglish.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    question = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    option1 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    option2 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    option3 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    option1PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    option2PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    option3PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    correctAnswer = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
-                    idTasksABC = table.Column<int>(type: "int", nullable: true),
-                    explanation = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true)
+                    question = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    option1 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    option2 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    option3 = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    option1PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    option2PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    option3PL = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    correctAnswer = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false),
+                    idTasksABC = table.Column<int>(type: "int", nullable: false),
+                    explanation = table.Column<string>(type: "varchar(max)", unicode: false, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -165,7 +168,8 @@ namespace LearnEnglish.Migrations
                         name: "FK_TasksABCAnswer_TasksABC",
                         column: x => x.idTasksABC,
                         principalTable: "TasksABC",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -211,30 +215,6 @@ namespace LearnEnglish.Migrations
                         name: "FK_TasksGapsZABCPossibleAnswer_TasksGapsZABCPack",
                         column: x => x.idTasksGapsABCPack,
                         principalTable: "TasksGapsZABCPack",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DialogueTasksGapsAnswerPack",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    idDialogueTasksGaps = table.Column<int>(type: "int", nullable: true),
-                    answerNumber = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DialogueTasksGapsAnswerPack", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_DialogueTasksGapsAnswerPack_DialogueTasksGaps1",
-                        column: x => x.idDialogueTasksGaps,
-                        principalTable: "DialogueTasksGaps",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "FK_DialogueTasksGapsAnswerPack_DialogueTasksGapsCorrectAnswer",
-                        column: x => x.idDialogueTasksGaps,
-                        principalTable: "DialogueTasksGapsCorrectAnswer",
                         principalColumn: "id");
                 });
 
@@ -294,11 +274,6 @@ namespace LearnEnglish.Migrations
                 column: "idAudioTask");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DialogueTasksGapsAnswerPack_idDialogueTasksGaps",
-                table: "DialogueTasksGapsAnswerPack",
-                column: "idDialogueTasksGaps");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DialogueTasksGapsCorrectAnswer_idDialogueTasksGaps",
                 table: "DialogueTasksGapsCorrectAnswer",
                 column: "idDialogueTasksGaps");
@@ -344,13 +319,14 @@ namespace LearnEnglish.Migrations
                 column: "idTasksGapsABCPack");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "AudioTasksGapsCorrectAnswer");
 
             migrationBuilder.DropTable(
-                name: "DialogueTasksGapsAnswerPack");
+                name: "DialogueTasksGapsCorrectAnswer");
 
             migrationBuilder.DropTable(
                 name: "TasksABCAnswer");
@@ -365,7 +341,7 @@ namespace LearnEnglish.Migrations
                 name: "AudioTasksGaps");
 
             migrationBuilder.DropTable(
-                name: "DialogueTasksGapsCorrectAnswer");
+                name: "DialogueTasksGaps");
 
             migrationBuilder.DropTable(
                 name: "TasksABC");
@@ -375,9 +351,6 @@ namespace LearnEnglish.Migrations
 
             migrationBuilder.DropTable(
                 name: "TasksGapsZABCPossibleAnswer");
-
-            migrationBuilder.DropTable(
-                name: "DialogueTasksGaps");
 
             migrationBuilder.DropTable(
                 name: "TasksGaps");

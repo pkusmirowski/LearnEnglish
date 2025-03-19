@@ -31,7 +31,7 @@ namespace LearnEnglish.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-VJR295T;Database=EnglishDB;Trusted_Connection=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer("Server=KOMPUTER\\SQLEXPRESS;Database=EnglishDB;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;");
             }
         }
 

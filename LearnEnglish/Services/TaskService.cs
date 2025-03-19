@@ -4,13 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LearnEnglish.Services
 {
-    public class TaskService
+    public class TaskService(EnglishDBContext context)
     {
-        private readonly EnglishDBContext _context;
-        public TaskService(EnglishDBContext context)
-        {
-            _context = context;
-        }
+        private readonly EnglishDBContext _context = context;
 
         public TasksABCViewModel GetTaskABC()
         {
@@ -216,7 +212,7 @@ namespace LearnEnglish.Services
 
             return new TasksGapsABCViewModel
             {
-                TaskGapsABC = taskGaps != null ? new List<TasksGapsABCItemViewModel> { taskGaps } : new List<TasksGapsABCItemViewModel>()
+                TaskGapsABC = taskGaps != null ? [taskGaps] : new List<TasksGapsABCItemViewModel>()
             };
         }
 
@@ -235,7 +231,7 @@ namespace LearnEnglish.Services
 
             var correctAnswers = _context.TasksGapsZabccorrectAnswers
                 .Where(x => x.IdTasksGapsAbc == currentTask.Id)
-                .Select(x => x.IdTasksGapsAbcpossibleAnswerNavigation.PossibleAnswer)
+                .Select(x => x.IdTasksGapsAbcpossibleAnswerNavigation != null ? x.IdTasksGapsAbcpossibleAnswerNavigation.PossibleAnswer : null)
                 .ToList();
 
             bool[] isAnswerCorrect = new bool[answer.Length];
